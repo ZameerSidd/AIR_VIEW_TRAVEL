@@ -1,65 +1,55 @@
-import { useState, useEffect } from "react";
-import { AnimatePresence } from "motion/react";
-import { SplashScreen } from "./components/SplashScreen";
-import { AnimatedHeader } from "./components/AnimatedHeader";
-import { AnimatedHero } from "./components/AnimatedHero";
-import { AnimatedServices } from "./components/AnimatedServices";
-import { VisionMissionSection } from "./components/VisionMissionSection";
-import { AboutSection } from "./components/AboutSection";
-import { ContactSection } from "./components/ContactSection";
-import { FloatingElements } from "./components/FloatingElements";
-import { FloatingWhatsApp } from "./components/FloatingWhatsApp";
+import React, { useState, useEffect } from 'react';
+import SplashScreen from './components/SplashScreen';
+import { AnimatedHeader } from './components/AnimatedHeader';
+import { AnimatedHero } from './components/AnimatedHero';
+import { AnimatedServices } from './components/AnimatedServices';
+import { AboutSection } from './components/AboutSection';
+import { ContactSection } from './components/ContactSection';
+import { VisionMissionSection } from './components/VisionMissionSection';
+import { FloatingElements } from './components/FloatingElements';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
-export default function App() {
+function App() {
   const [showSplash, setShowSplash] = useState(true);
 
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-  };
-
-  // Auto-hide splash screen after 6 seconds as fallback
   useEffect(() => {
-    const fallbackTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 6000);
+    }, 3000);
 
-    return () => clearTimeout(fallbackTimer);
+    return () => clearTimeout(timer);
   }, []);
 
+  if (showSplash) {
+    return <SplashScreen />;
+  }
+
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {showSplash && (
-          <SplashScreen key="splash" onComplete={handleSplashComplete} />
-        )}
-      </AnimatePresence>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 bg-gradient-radial from-blue-500/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-radial from-purple-500/20 to-transparent"></div>
+      </div>
 
-      {!showSplash && (
-        <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
-          {/* Animated Background Elements */}
-          <FloatingElements />
-          
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_500px_at_50%_200px,#3b82f6,transparent)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_80%_300px,#8b5cf6,transparent)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_600px_at_20%_800px,#06b6d4,transparent)]" />
-          </div>
-          
-          {/* Content */}
-          <div className="relative z-10">
-            <AnimatedHeader />
-            <AnimatedHero />
-            <AnimatedServices />
-            <VisionMissionSection />
-            <AboutSection />
-            <ContactSection />
-          </div>
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <FloatingElements />
+      </div>
 
-          {/* Floating WhatsApp Button */}
-          <FloatingWhatsApp />
-        </div>
-      )}
-    </>
+      {/* Main Content */}
+      <div className="relative z-10">
+        <AnimatedHeader />
+        <AnimatedHero />
+        <AnimatedServices />
+        <VisionMissionSection />
+        <AboutSection />
+        <ContactSection />
+      </div>
+
+      <FloatingWhatsApp />
+    </div>
   );
 }
+
+export default App;
