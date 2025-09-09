@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
-import { X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
+import { X, MessageCircle } from "lucide-react";
 
 // WhatsApp SVG Icon Component
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -13,144 +13,250 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export function FloatingWhatsApp() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
-  
+const FloatingWhatsApp = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
   const whatsappNumber = "+971521110934";
   const defaultMessage = "Hello! I'm interested in your travel services. Could you please provide more information?";
 
-  const handleWhatsApp = () => {
+  const handleWhatsAppClick = () => {
     const url = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(defaultMessage)}`;
     window.open(url, '_blank');
   };
 
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <>
-      {/* Floating WhatsApp Button */}
+      {/* WhatsApp Floating Button */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 3 }} // Appears after splash screen
-        className="fixed bottom-6 right-6 z-40"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        transition={{ 
+          duration: 0.5, 
+          delay: 2.5,
+          type: "spring",
+          stiffness: 300
+        }}
+        className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4"
       >
-        {/* Pulsing Ring Animation */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.7, 0, 0.7],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0 bg-green-500 rounded-full"
-        />
         
-        {/* WhatsApp Button */}
+        {/* Expanded Chat Preview */}
+        <AnimatePresence>
+          {isExpanded && (
+            <>
+              {/* Mobile Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsExpanded(false)}
+                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
+              />
+              
+              {/* Chat Preview */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 20 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 25 
+                }}
+                className="bg-white rounded-2xl shadow-2xl p-4 max-w-xs border border-gray-200 relative z-50"
+              >
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-4">
+                  <motion.div
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 text-green-600" />
+                  </motion.div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-800 text-sm">Air View Travel</div>
+                    <div className="text-xs text-gray-500 flex items-center gap-1">
+                      <motion.div
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="w-2 h-2 bg-green-500 rounded-full"
+                      />
+                      Online now
+                    </div>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={toggleExpanded}
+                    className="text-gray-400 hover:text-gray-600 p-1 rounded-full hover:bg-gray-100 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </motion.button>
+                </div>
+                
+                {/* Messages */}
+                <div className="space-y-3 mb-4">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-gray-100 rounded-lg p-3 text-sm text-gray-700 relative"
+                  >
+                    <div className="flex items-start gap-2">
+                      <span>👋</span>
+                      <div>
+                        <p>Hi there! Welcome to Air View Travel!</p>
+                        <p className="mt-1 text-xs text-gray-500">How can we help you today?</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-gray-100 rounded-lg p-3 text-sm text-gray-700"
+                  >
+                    <p>✈️ Flight Bookings</p>
+                    <p>🛂 Visa Services</p>
+                    <p>🏨 Hotel Reservations</p>
+                    <p>🎯 Complete Travel Packages</p>
+                  </motion.div>
+                </div>
+                
+                {/* Action Button */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleWhatsAppClick}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-xl font-medium transition-colors duration-200 flex items-center justify-center gap-2 relative overflow-hidden"
+                >
+                  <motion.div
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  />
+                  <WhatsAppIcon className="w-4 h-4 relative z-10" />
+                  <span className="relative z-10">Start Chat</span>
+                </motion.button>
+                
+                {/* Typing Indicator */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="flex items-center gap-2 mt-3 text-xs text-gray-500"
+                >
+                  <div className="flex gap-1">
+                    {[0, 1, 2].map((i) => (
+                      <motion.div
+                        key={i}
+                        animate={{ scale: [1, 1.5, 1] }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          delay: i * 0.2
+                        }}
+                        className="w-1.5 h-1.5 bg-gray-400 rounded-full"
+                      />
+                    ))}
+                  </div>
+                  Air View Travel is typing...
+                </motion.div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+
+        {/* Main WhatsApp Button */}
         <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={handleWhatsApp}
-          className="relative w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+          whileHover={{ 
+            scale: 1.1,
+            boxShadow: "0 0 25px rgba(34, 197, 94, 0.5)"
+          }}
+          whileTap={{ scale: 0.95 }}
+          onClick={isExpanded ? handleWhatsAppClick : toggleExpanded}
+          className="relative w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white shadow-2xl transition-all duration-300 group"
         >
+          
+          {/* Pulsing Ring */}
           <motion.div
-            animate={{ rotate: isHovered ? 360 : 0 }}
-            transition={{ duration: 0.5 }}
+            animate={{ scale: [1, 1.4, 1], opacity: [0.7, 0, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 bg-green-500 rounded-full"
+          />
+          
+          {/* Icon with Animation */}
+          <motion.div
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+            className="relative z-10"
           >
-            <WhatsAppIcon className="w-8 h-8 text-white" />
+            <AnimatePresence mode="wait">
+              {isExpanded ? (
+                <motion.div
+                  key="close"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <MessageCircle className="w-8 h-8" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="whatsapp"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <WhatsAppIcon className="w-8 h-8" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
           
           {/* Notification Dot */}
           <motion.div
-            animate={{
+            animate={{ 
               scale: [1, 1.2, 1],
+              opacity: [1, 0.7, 1]
             }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            transition={{ duration: 1.5, repeat: Infinity }}
             className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white flex items-center justify-center"
           >
-            <div className="w-2 h-2 bg-white rounded-full" />
+            <span className="text-[10px] font-bold">1</span>
           </motion.div>
+          
+          {/* Hover Glow Effect */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ opacity: 1, scale: 1.2 }}
+            className="absolute inset-0 bg-green-400 rounded-full blur-xl transition-all duration-300"
+          />
         </motion.button>
 
         {/* Tooltip */}
-        <motion.div
-          initial={{ opacity: 0, x: 10, scale: 0.8 }}
-          animate={{ 
-            opacity: isHovered ? 1 : 0, 
-            x: isHovered ? 0 : 10,
-            scale: isHovered ? 1 : 0.8
-          }}
-          transition={{ duration: 0.2 }}
-          className="absolute right-20 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg whitespace-nowrap pointer-events-none"
-        >
-          <div className="text-sm font-medium">Chat with us on WhatsApp!</div>
-          <div className="text-xs text-gray-600">Quick response guaranteed</div>
-          
-          {/* Arrow */}
-          <div className="absolute right-0 top-1/2 transform translate-x-1 -translate-y-1/2">
-            <div className="w-0 h-0 border-l-4 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent" />
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Mobile-friendly chat bubble - Auto show after delay */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 8 }}
-        onAnimationComplete={() => {
-          setTimeout(() => setShowTooltip(true), 2000);
-          setTimeout(() => setShowTooltip(false), 8000);
-        }}
-        className="fixed bottom-24 right-6 z-30 max-w-xs"
-      >
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: showTooltip ? 1 : 0, opacity: showTooltip ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="bg-white rounded-2xl shadow-lg p-4 relative"
-        >
-          <button
-            onClick={() => setShowTooltip(false)}
-            className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
-          >
-            <X className="w-4 h-4" />
-          </button>
-          
-          <div className="flex items-start gap-3">
-            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-              <WhatsAppIcon className="w-5 h-5 text-green-600" />
-            </div>
-            <div>
-              <div className="font-medium text-gray-800 text-sm">Air View Travel</div>
-              <div className="text-gray-600 text-xs mt-1">
-                Hi there! 👋 Need help with your travel plans? Chat with us now!
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleWhatsApp}
-                className="mt-3 bg-green-500 hover:bg-green-600 text-white text-xs px-4 py-2 rounded-full transition-colors"
-              >
-                Start Chat
-              </motion.button>
-            </div>
-          </div>
-          
-          {/* Speech bubble tail */}
-          <div className="absolute bottom-0 right-8 transform translate-y-2">
-            <div className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white" />
-          </div>
-        </motion.div>
+        <AnimatePresence>
+          {!isExpanded && (
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              className="absolute right-20 bottom-4 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap pointer-events-none"
+            >
+              Need help? Chat with us!
+              <div className="absolute right-[-6px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-6 border-l-gray-800 border-t-6 border-t-transparent border-b-6 border-b-transparent" />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
     </>
   );
-}
+};
+
+export default FloatingWhatsApp;

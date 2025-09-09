@@ -13,6 +13,17 @@ import {
   CreditCard,
   Clock
 } from "lucide-react";
+import {
+  FlightImage,
+  GlobalVisaImage,
+  UAEVisaImage,
+  HotelImage,
+  HolidayImage,
+  InsuranceImage,
+  AttestationImage,
+  CityToursImage,
+  TripPlanningImage
+} from "../assets/images";
 
 export function AnimatedServices() {
   const services = [
@@ -21,56 +32,72 @@ export function AnimatedServices() {
       title: "Flight Tickets",
       subtitle: "Best Deals Worldwide",
       description: "Book domestic and international flights at competitive prices",
-      color: "from-blue-500 to-cyan-500"
+      color: "from-blue-500 to-cyan-500",
+      image: FlightImage
+    },
+    {
+      icon: Globe,
+      title: "Global Visa Assistance",
+      subtitle: "Worldwide Visa Support",
+      description: "Complete visa processing for all international destinations",
+      color: "from-green-500 to-emerald-500",
+      image: GlobalVisaImage
     },
     {
       icon: FileText,
-      title: "Visa Assistance",
-      subtitle: "Global & UAE Tourist Visa",
-      description: "Complete visa processing and documentation support",
-      color: "from-green-500 to-emerald-500"
+      title: "UAE Tourist Visa",
+      subtitle: "UAE Entry Made Easy",
+      description: "Fast and reliable UAE tourist visa processing services",
+      color: "from-emerald-500 to-teal-500",
+      image: UAEVisaImage
     },
     {
       icon: Building,
       title: "Hotel Booking",
       subtitle: "Luxury to Budget",
       description: "Premium accommodations and hotel reservations worldwide",
-      color: "from-purple-500 to-pink-500"
+      color: "from-purple-500 to-pink-500",
+      image: HotelImage
     },
     {
       icon: Palmtree,
       title: "Holiday Packages",
       subtitle: "Complete Travel Solutions",
       description: "Customized vacation packages for memorable experiences",
-      color: "from-orange-500 to-red-500"
+      color: "from-orange-500 to-red-500",
+      image: HolidayImage
     },
     {
       icon: Shield,
       title: "Travel Insurance",
       subtitle: "Comprehensive Coverage",
       description: "Protect your journey with comprehensive travel insurance",
-      color: "from-indigo-500 to-blue-500"
+      color: "from-indigo-500 to-blue-500",
+      image: InsuranceImage
     },
     {
       icon: Award,
       title: "Attestation Services",
       subtitle: "Document Verification",
       description: "Professional document attestation and verification services",
-      color: "from-yellow-500 to-orange-500"
+      color: "from-yellow-500 to-orange-500",
+      image: AttestationImage
     },
     {
       icon: Users,
       title: "City Tours",
       subtitle: "Guided Experiences",
       description: "Discover destinations with expert local guides",
-      color: "from-teal-500 to-green-500"
+      color: "from-teal-500 to-green-500",
+      image: CityToursImage
     },
     {
       icon: Briefcase,
       title: "Trip Organization",
       subtitle: "Business & Leisure",
       description: "Complete trip planning and organization services",
-      color: "from-pink-500 to-purple-500"
+      color: "from-pink-500 to-purple-500",
+      image: TripPlanningImage
     },
   ];
 
@@ -152,10 +179,11 @@ export function AnimatedServices() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6"
         >
           {services.map((service, index) => {
             const IconComponent = service.icon;
+            const ImageComponent = service.image;
             return (
               <motion.div
                 key={index}
@@ -179,65 +207,63 @@ export function AnimatedServices() {
                 </div>
 
                 {/* Main Card */}
-                <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 group-hover:border-transparent transition-all duration-300">
+                <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 group-hover:border-transparent transition-all duration-300">
                   
-                  {/* Icon with Subtle Animation */}
-                  <motion.div
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative mb-4"
-                  >
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} p-0.5`}>
-                      <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <IconComponent className="w-8 h-8 text-white" />
-                        </motion.div>
-                      </div>
-                    </div>
-                    
-                    {/* Gentle Glow Effect */}
+                  {/* Service Image */}
+                  <div className="relative h-48 overflow-hidden">
                     <motion.div
-                      animate={{
-                        opacity: [0.3, 0.6, 0.3]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                      className={`absolute inset-0 w-16 h-16 rounded-xl bg-gradient-to-r ${service.color} opacity-20 blur-sm`}
-                    />
-                  </motion.div>
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full"
+                    >
+                      <ImageComponent />
+                    </motion.div>
+                    
+                    {/* Image Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                    
+                    {/* Icon Overlay */}
+                    <motion.div
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute top-4 right-4"
+                    >
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${service.color} p-0.5`}>
+                        <div className="w-full h-full bg-slate-900/80 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                          <IconComponent className="w-6 h-6 text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
 
                   {/* Content */}
-                  <motion.h3 
-                    className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300"
-                  >
-                    {service.title}
-                  </motion.h3>
-                  
-                  <motion.p className="text-sm font-medium text-gray-400 mb-3">
-                    {service.subtitle}
-                  </motion.p>
-                  
-                  <motion.p className="text-sm text-gray-300 leading-relaxed">
-                    {service.description}
-                  </motion.p>
+                  <div className="p-6">
+                    <motion.h3 
+                      className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300"
+                    >
+                      {service.title}
+                    </motion.h3>
+                    
+                    <motion.p className="text-sm font-medium text-gray-400 mb-3">
+                      {service.subtitle}
+                    </motion.p>
+                    
+                    <motion.p className="text-sm text-gray-300 leading-relaxed">
+                      {service.description}
+                    </motion.p>
 
-                  {/* Hover Arrow */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -10 }}
-                    whileHover={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute bottom-4 right-4 text-blue-400"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M3 10h12m-5-5l5 5-5 5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </motion.div>
+                    {/* Hover Arrow */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileHover={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute bottom-4 right-4 text-blue-400"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M3 10h12m-5-5l5 5-5 5" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             );

@@ -46,12 +46,12 @@ export function AnimatedHeader() {
               <motion.div
                 whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.6 }}
-                className="w-12 h-12 rounded-full overflow-hidden"
+                className="w-12 h-12 rounded-full overflow-hidden bg-white p-1"
               >
                 <img
                   src={exampleLogo}
                   alt="Air View Travel Logo"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain rounded-full"
                 />
               </motion.div>
               <div className="text-white">
@@ -183,11 +183,11 @@ export function AnimatedHeader() {
               <div className="p-6 border-b border-white/10">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-1">
                       <img
                         src={exampleLogo}
                         alt="Air View Travel Logo"
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-contain rounded-full"
                       />
                     </div>
                     <div className="text-white">

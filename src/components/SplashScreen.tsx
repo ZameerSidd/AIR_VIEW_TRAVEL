@@ -1,272 +1,306 @@
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { Plane, MapPin, Clock } from "lucide-react";
+import { Plane, Globe, Sparkles } from "lucide-react";
 import exampleLogo from 'figma:asset/36d4afc0a5f2929cd1c0f8dc03fae457132cc1e6.png';
 
-interface SplashScreenProps {
-  onComplete: () => void;
-}
-
-export function SplashScreen({ onComplete }: SplashScreenProps) {
-  const [currentStep, setCurrentStep] = useState(0);
+const SplashScreen = () => {
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [showWelcome, setShowWelcome] = useState(false);
 
   useEffect(() => {
-    const steps = [0, 1, 2, 3];
-    let currentIndex = 0;
+    const progressInterval = setInterval(() => {
+      setLoadingProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(progressInterval);
+          setTimeout(() => setShowWelcome(true), 500);
+          return 100;
+        }
+        return prev + 2;
+      });
+    }, 30);
 
-    const interval = setInterval(() => {
-      currentIndex++;
-      if (currentIndex < steps.length) {
-        setCurrentStep(steps[currentIndex]);
-      } else {
-        clearInterval(interval);
-        setTimeout(onComplete, 800); // Small delay before completing
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [onComplete]);
-
-  const loadingTexts = [
-    "Welcome to Air View Travel",
-    "Connecting You to the World",
-    "Your Journey Begins Here",
-    "Ready to Explore"
-  ];
+    return () => clearInterval(progressInterval);
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center z-50 overflow-hidden"
     >
+      
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ 
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ 
-            duration: 8, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-          className="absolute top-20 left-20 w-32 h-32 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl"
-        />
-        <motion.div
-          animate={{ 
-            rotate: [360, 0],
-            scale: [1.2, 1, 1.2],
-          }}
-          transition={{ 
-            duration: 10, 
-            repeat: Infinity, 
-            ease: "linear" 
-          }}
-          className="absolute bottom-20 right-20 w-48 h-48 rounded-full bg-gradient-to-r from-cyan-400/20 to-pink-400/20 blur-xl"
-        />
-        <motion.div
-          animate={{ 
-            y: [-20, 20, -20],
-            x: [-10, 10, -10],
-          }}
-          transition={{ 
-            duration: 6, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full bg-gradient-to-r from-green-400/20 to-blue-400/20 blur-lg"
-        />
-      </div>
-
-      {/* Floating Travel Icons */}
       <div className="absolute inset-0">
+        {/* Floating Planes */}
         <motion.div
           animate={{ 
-            y: [-100, -120, -100],
-            rotate: [0, 10, 0]
+            x: [0, 100, 200, 300, 400],
+            y: [50, 30, 70, 40, 60],
+            rotate: [0, 5, -5, 10, 0]
           }}
-          transition={{ 
-            duration: 4, 
-            repeat: Infinity, 
-            ease: "easeInOut" 
-          }}
-          className="absolute top-1/4 right-1/3"
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-20 left-0"
         >
-          <Plane className="w-8 h-8 text-blue-400/60" />
+          <Plane className="w-8 h-8 text-white/20" />
         </motion.div>
+        
         <motion.div
           animate={{ 
-            y: [0, -20, 0],
-            x: [-5, 5, -5]
+            x: [400, 300, 200, 100, 0],
+            y: [200, 180, 220, 190, 210],
+            rotate: [180, 185, 175, 190, 180]
           }}
-          transition={{ 
-            duration: 5, 
-            repeat: Infinity, 
-            ease: "easeInOut",
-            delay: 1
-          }}
-          className="absolute bottom-1/3 left-1/4"
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-40 right-0"
         >
-          <MapPin className="w-6 h-6 text-purple-400/60" />
+          <Plane className="w-6 h-6 text-white/15" />
         </motion.div>
+
+        {/* Floating Globes */}
         <motion.div
-          animate={{ 
-            rotate: [0, 360],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ 
-            duration: 8, 
-            repeat: Infinity, 
-            ease: "linear",
-            delay: 2
-          }}
-          className="absolute top-1/3 left-1/6"
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-40 left-20"
         >
-          <Clock className="w-7 h-7 text-cyan-400/60" />
+          <Globe className="w-12 h-12 text-white/10" />
         </motion.div>
+
+        {/* Twinkling Stars */}
+        {Array.from({ length: 8 }).map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              opacity: [0.2, 1, 0.2],
+              scale: [0.5, 1, 0.5]
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "easeInOut"
+            }}
+            className="absolute text-yellow-400/40"
+            style={{
+              top: `${15 + i * 10}%`,
+              left: `${10 + i * 10}%`,
+            }}
+          >
+            <Sparkles className="w-4 h-4" />
+          </motion.div>
+        ))}
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 text-center">
-        {/* Logo Animation */}
+      <div className="text-center relative z-10">
+        
+        {/* Logo with Animated Entrance */}
         <motion.div
           initial={{ scale: 0, rotate: -180, opacity: 0 }}
           animate={{ scale: 1, rotate: 0, opacity: 1 }}
           transition={{ 
             duration: 1.2, 
-            ease: "easeOut",
+            delay: 0.3,
             type: "spring",
             stiffness: 100
           }}
           className="mb-8"
         >
-          <div className="relative mx-auto w-24 h-24 mb-6">
+          <motion.div
+            animate={{ 
+              rotate: [0, 10, -10, 0],
+              scale: [1, 1.05, 1]
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity,
+              ease: "easeInOut" 
+            }}
+            className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden relative bg-white p-2"
+          >
+            <motion.img
+              src={exampleLogo}
+              alt="Air View Travel Logo"
+              className="w-full h-full object-contain rounded-full"
+              whileHover={{ scale: 1.1 }}
+            />
+            
+            {/* Glow Effect */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ 
-                duration: 20, 
-                repeat: Infinity, 
-                ease: "linear" 
+              animate={{ 
+                opacity: [0.5, 1, 0.5],
+                scale: [1, 1.2, 1] 
               }}
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 p-1"
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                ease: "easeInOut" 
+              }}
+              className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-md"
+            />
+          </motion.div>
+          
+          {/* Company Name with Staggered Animation */}
+          <motion.h1
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="text-4xl md:text-5xl font-bold text-white mb-2"
+          >
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.7 }}
+              className="inline-block"
             >
-              <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                <img
-                  src={exampleLogo}
-                  alt="Air View Travel Logo"
-                  className="w-16 h-16 object-contain"
+              AIR VIEW
+            </motion.span>{" "}
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.9 }}
+              className="inline-block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+            >
+              TRAVEL
+            </motion.span>
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 2.1 }}
+            className="text-lg text-blue-300"
+          >
+            AND TOURISM - L.L.C
+          </motion.p>
+        </motion.div>
+
+        {/* Loading Progress */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 2.3 }}
+          className="w-80 max-w-sm mx-auto"
+        >
+          
+          {/* Progress Bar */}
+          <div className="relative mb-6">
+            <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+              <motion.div
+                animate={{ width: `${loadingProgress}%` }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full relative"
+              >
+                {/* Shimmer Effect */}
+                <motion.div
+                  animate={{ x: ["-100%", "100%"] }}
+                  transition={{ 
+                    duration: 1.5, 
+                    repeat: Infinity,
+                    ease: "easeInOut" 
+                  }}
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                 />
-              </div>
+              </motion.div>
+            </div>
+            
+            {/* Progress Percentage */}
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+              className="absolute -top-8 left-1/2 transform -translate-x-1/2"
+            >
+              <span className="text-white font-semibold text-sm">
+                {loadingProgress}%
+              </span>
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
-              AIR VIEW TRAVEL
-            </h1>
-            <p className="text-lg text-gray-300">
-              AND TOURISM - L.L.C
-            </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Loading Text Animation */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mb-12"
-        >
-          <motion.h2
-            key={currentStep}
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="text-xl md:text-2xl text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text font-semibold"
-          >
-            {loadingTexts[currentStep]}
-          </motion.h2>
-        </motion.div>
-
-        {/* Loading Animation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="relative"
-        >
-          {/* Animated Progress Bar */}
-          <div className="w-64 h-2 bg-white/20 rounded-full mx-auto mb-4 overflow-hidden">
-            <motion.div
-              initial={{ width: "0%" }}
-              animate={{ width: `${((currentStep + 1) / loadingTexts.length) * 100}%` }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="h-full bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
-            />
-          </div>
-
-          {/* Loading Dots */}
-          <div className="flex justify-center space-x-2">
-            {[0, 1, 2].map((index) => (
+          {/* Loading Messages */}
+          <AnimatePresence mode="wait">
+            {!showWelcome ? (
               <motion.div
-                key={index}
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: index * 0.2,
-                }}
-                className="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
-              />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Bottom Tagline */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2 }}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-        >
-          <p className="text-gray-400 text-sm">
-            Your trusted travel partner since 2008
-          </p>
+                key="loading"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="text-center"
+              >
+                <motion.p
+                  animate={{ opacity: [0.7, 1, 0.7] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-white/80 text-sm mb-2"
+                >
+                  {loadingProgress < 30 && "Initializing your travel experience..."}
+                  {loadingProgress >= 30 && loadingProgress < 60 && "Loading premium services..."}
+                  {loadingProgress >= 60 && loadingProgress < 90 && "Preparing your journey..."}
+                  {loadingProgress >= 90 && "Almost ready!"}
+                </motion.p>
+                
+                {/* Loading Dots */}
+                <div className="flex justify-center gap-1">
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        delay: i * 0.2
+                      }}
+                      className="w-2 h-2 bg-blue-400 rounded-full"
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="welcome"
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center"
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 1, repeat: 2 }}
+                  className="text-2xl mb-2"
+                >
+                  ✈️
+                </motion.div>
+                <p className="text-white font-semibold text-lg">
+                  Welcome Aboard!
+                </p>
+                <p className="text-blue-300 text-sm">
+                  Your journey begins now...
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
 
-      {/* Particle Effect - Simplified */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              y: [-50, 600],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              delay: i * 0.5,
-              ease: "linear",
-            }}
-            className="absolute w-1 h-1 bg-white/30 rounded-full"
-            style={{
-              left: `${10 + i * 10}%`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Decorative Rotating Rings */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute top-20 left-20 w-32 h-32 border border-white/10 rounded-full"
+      />
+      
+      <motion.div
+        animate={{ rotate: -360 }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-20 right-20 w-40 h-40 border border-white/5 rounded-full"
+      />
+      
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full"
+      />
+
     </motion.div>
   );
-}
+};
+
+export default SplashScreen;
