@@ -11,7 +11,8 @@ import {
   MapPin,
   Briefcase,
   CreditCard,
-  Clock
+  Clock,
+  Home
 } from "lucide-react";
 import {
   FlightImage,
@@ -22,8 +23,9 @@ import {
   InsuranceImage,
   AttestationImage,
   CityToursImage,
-  TripPlanningImage
-} from "../assets/images";
+  TripPlanningImage,
+  UmrahImage
+} from "./images";
 
 export function AnimatedServices() {
   const services = [
@@ -91,13 +93,21 @@ export function AnimatedServices() {
       color: "from-teal-500 to-green-500",
       image: CityToursImage
     },
+    // {
+    //   icon: Briefcase,
+    //   title: "Trip Organization",
+    //   subtitle: "Business & Leisure",
+    //   description: "Complete trip planning and organization services",
+    //   color: "from-pink-500 to-purple-500",
+    //   image: TripPlanningImage
+    // },
     {
-      icon: Briefcase,
-      title: "Trip Organization",
-      subtitle: "Business & Leisure",
-      description: "Complete trip planning and organization services",
-      color: "from-pink-500 to-purple-500",
-      image: TripPlanningImage
+      icon: Home,
+      title: "Umrah Packages",
+      subtitle: "Sacred Journey",
+      description: "Complete Umrah pilgrimage packages with expert guidance",
+      color: "from-amber-500 to-orange-500",
+      image: UmrahImage
     },
   ];
 
@@ -146,7 +156,7 @@ export function AnimatedServices() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
           >
             Our Premium{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -158,7 +168,7 @@ export function AnimatedServices() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
             Comprehensive travel solutions tailored to make your journey seamless and memorable
           </motion.p>
@@ -207,7 +217,7 @@ export function AnimatedServices() {
                 </div>
 
                 {/* Main Card */}
-                <div className="relative bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 group-hover:border-transparent transition-all duration-300">
+                <div className="relative bg-white/90 backdrop-blur-lg rounded-2xl overflow-hidden border border-gray-200 group-hover:border-transparent transition-all duration-300 shadow-lg">
                   
                   {/* Service Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -220,7 +230,7 @@ export function AnimatedServices() {
                     </motion.div>
                     
                     {/* Image Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/20 to-transparent" />
                     
                     {/* Icon Overlay */}
                     <motion.div
@@ -229,8 +239,8 @@ export function AnimatedServices() {
                       className="absolute top-4 right-4"
                     >
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${service.color} p-0.5`}>
-                        <div className="w-full h-full bg-slate-900/80 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                          <IconComponent className="w-6 h-6 text-white" />
+                        <div className="w-full h-full bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                          <IconComponent className="w-6 h-6 text-gray-900" />
                         </div>
                       </div>
                     </motion.div>
@@ -239,16 +249,16 @@ export function AnimatedServices() {
                   {/* Content */}
                   <div className="p-6">
                     <motion.h3 
-                      className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300"
+                      className="text-xl font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300"
                     >
                       {service.title}
                     </motion.h3>
                     
-                    <motion.p className="text-sm font-medium text-gray-400 mb-3">
+                    <motion.p className="text-sm font-medium text-gray-600 mb-3">
                       {service.subtitle}
                     </motion.p>
                     
-                    <motion.p className="text-sm text-gray-300 leading-relaxed">
+                    <motion.p className="text-sm text-gray-700 leading-relaxed">
                       {service.description}
                     </motion.p>
 

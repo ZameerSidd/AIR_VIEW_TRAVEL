@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { Plane, Globe, Sparkles } from "lucide-react";
-import exampleLogo from 'figma:asset/36d4afc0a5f2929cd1c0f8dc03fae457132cc1e6.png';
 
 const SplashScreen = () => {
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -119,7 +118,7 @@ const SplashScreen = () => {
             className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden relative bg-white p-2"
           >
             <motion.img
-              src={exampleLogo}
+              src={"images/logo.png"}
               alt="Air View Travel Logo"
               className="w-full h-full object-contain rounded-full"
               whileHover={{ scale: 1.1 }}
