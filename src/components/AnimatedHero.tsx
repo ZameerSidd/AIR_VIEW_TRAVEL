@@ -23,16 +23,26 @@ export function AnimatedHero() {
     <section className="relative min-h-screen flex items-center justify-center pt-20 px-4">
       <div className="max-w-6xl mx-auto text-center relative z-10">
         
+        {/* Company Logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="mb-8"
+        >
+
+        </motion.div>
+        
         {/* Background Animated Circles */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-20 -left-20 w-40 h-40 rounded-full border border-white/10"
+          className="absolute -top-20 -left-20 w-40 h-40 rounded-full border border-gray-200/50"
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-white/5"
+          className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-gray-100/50"
         />
         
         {/* Main Title with Staggered Animation */}
@@ -46,7 +56,7 @@ export function AnimatedHero() {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4"
           >
             <motion.span
               initial={{ display: "inline-block", y: 20, opacity: 0 }}
@@ -60,7 +70,7 @@ export function AnimatedHero() {
               initial={{ display: "inline-block", y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="inline-block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
               Travel
             </motion.span>{" "}
@@ -77,7 +87,7 @@ export function AnimatedHero() {
               initial={{ display: "inline-block", y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 1.3 }}
-              className="inline-block bg-gradient-to-r from-yellow-400 to-red-400 bg-clip-text text-transparent"
+              className="inline-block bg-gradient-to-r from-amber-600 to-red-600 bg-clip-text text-transparent"
             >
               Come True
             </motion.span>
@@ -89,7 +99,7 @@ export function AnimatedHero() {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
         >
           Experience the world with our comprehensive travel services. From visa assistance to luxury accommodations, we make your journey unforgettable.
         </motion.p>
@@ -115,15 +125,15 @@ export function AnimatedHero() {
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ duration: 0.6, delay: 1.9 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20"
+                className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200/50 shadow-lg"
               >
                 <motion.div
                   animate={floatingAnimation}
                   className="text-center"
                 >
-                  <IconComponent className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-white">{stat.number}</div>
-                  <div className="text-sm text-gray-300">{stat.label}</div>
+                  <IconComponent className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                  <div className="text-2xl font-bold text-gray-900">{stat.number}</div>
+                  <div className="text-sm text-gray-600">{stat.label}</div>
                 </motion.div>
               </motion.div>
             );
@@ -159,7 +169,7 @@ export function AnimatedHero() {
               size="lg"
               variant="outline"
               onClick={() => scrollToSection('contact')}
-              className="bg-white/10 border-white/30 text-white hover:bg-white/20 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300"
+              className="bg-white/80 border-gray-300 text-gray-900 hover:bg-white/90 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300 shadow-lg"
             >
               <Plane className="w-5 h-5 mr-2" />
               Contact Us
@@ -183,7 +193,7 @@ export function AnimatedHero() {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="flex flex-col items-center text-white/60 cursor-pointer"
+            className="flex flex-col items-center text-gray-500 cursor-pointer"
             onClick={() => scrollToSection('services')}
           >
             <span className="text-sm mb-2">Scroll Down</span>

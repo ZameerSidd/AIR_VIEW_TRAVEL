@@ -103,10 +103,10 @@ export function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
           >
             About{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Air View Travel
             </span>
           </motion.h2>
@@ -115,7 +115,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed"
+            className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
           >
             Established as a premier travel agency in Abu Dhabi, Air View Travel and Tourism L.L.C 
             has been the trusted partner for thousands of travelers seeking exceptional experiences. 
@@ -131,7 +131,7 @@ export function AboutSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-20"
         >
-          <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10">
+          <div className="bg-white/90 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 shadow-lg">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               
               {/* Story Content */}
@@ -141,7 +141,7 @@ export function AboutSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="text-3xl font-bold text-white mb-6"
+                  className="text-3xl font-bold text-gray-900 mb-6"
                 >
                   Our Journey
                 </motion.h3>
@@ -150,7 +150,7 @@ export function AboutSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="space-y-4 text-gray-300"
+                  className="space-y-4 text-gray-600"
                 >
                   <p>
                     Founded with a vision to make travel accessible and enjoyable for everyone, 
@@ -189,23 +189,23 @@ export function AboutSection() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                       whileHover={{ scale: 1.05, y: -5 }}
-                      className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center"
+                      className="bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-200 text-center shadow-lg"
                     >
                       <motion.div
                         whileHover={{ rotate: 5 }}
                         className="w-12 h-12 mx-auto mb-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 p-0.5"
                       >
-                        <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                          <IconComponent className="w-6 h-6 text-white" />
+                        <div className="w-full h-full bg-white rounded-xl flex items-center justify-center shadow-sm">
+                          <IconComponent className="w-6 h-6 text-gray-900" />
                         </div>
                       </motion.div>
-                      <div className="text-2xl font-bold text-white mb-1">
+                      <div className="text-2xl font-bold text-gray-900 mb-1">
                         {achievement.number}
                       </div>
-                      <div className="text-sm font-semibold text-gray-300 mb-2">
+                      <div className="text-sm font-semibold text-gray-600 mb-2">
                         {achievement.label}
                       </div>
-                      <div className="text-xs text-gray-400">
+                      <div className="text-xs text-gray-500">
                         {achievement.description}
                       </div>
                     </motion.div>
@@ -230,10 +230,10 @@ export function AboutSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl md:text-4xl font-bold text-white text-center mb-12"
+            className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12"
           >
             Why Choose{" "}
-            <span className="bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
               Air View Travel?
             </span>
           </motion.h3>
@@ -249,7 +249,7 @@ export function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                  className="group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+                  className="group bg-white/90 backdrop-blur-lg rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 shadow-lg"
                 >
                   
                   {/* Icon */}
@@ -258,17 +258,17 @@ export function AboutSection() {
                     className="mb-4"
                   >
                     <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${reason.color} p-0.5`}>
-                      <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                        <IconComponent className="w-7 h-7 text-white" />
+                      <div className="w-full h-full bg-white rounded-xl flex items-center justify-center shadow-sm">
+                        <IconComponent className="w-7 h-7 text-gray-900" />
                       </div>
                     </div>
                   </motion.div>
 
                   {/* Content */}
-                  <h4 className="text-lg font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                     {reason.title}
                   </h4>
-                  <p className="text-gray-300 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-sm leading-relaxed">
                     {reason.description}
                   </p>
 
@@ -293,17 +293,17 @@ export function AboutSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center"
         >
-          <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-lg rounded-3xl p-12 border border-white/10">
+          <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 backdrop-blur-lg rounded-3xl p-12 border border-gray-200 shadow-lg">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <h3 className="text-3xl font-bold text-white mb-4">
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
                 Ready to Start Your Journey?
               </h3>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
                 Let our experienced team help you create unforgettable travel memories. 
                 Contact us today for personalized travel solutions.
               </p>

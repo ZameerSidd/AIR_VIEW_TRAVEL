@@ -32,7 +32,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 );
 
 export function ContactSection() {
-  const whatsappNumber = "+971521110934"; // WhatsApp number
+  const whatsappNumber = "+971529969344"; // WhatsApp number
   const defaultMessage = "Hello! I'm interested in your travel services. Could you please provide more information?";
   
   const handleWhatsApp = () => {
@@ -58,7 +58,7 @@ export function ContactSection() {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+971 2 442 0602", "+971 52 111 0934", "+971 52 111 0932"],
+      details: ["+971 2 442 0602", "+971 52 111 0934", "+971 52 111 0934"],
       color: "from-green-400 to-emerald-400",
       action: "phone"
     },
@@ -79,7 +79,7 @@ export function ContactSection() {
     {
       icon: Clock,
       title: "Working Hours",
-      details: ["Mon - Fri: 9:00 AM - 8:00 PM", "Sat: 9:00 AM - 6:00 PM", "Sun: 10:00 AM - 4:00 PM"],
+      details: ["Mon - Sat: 9:00 AM - 10:00 PM", "Sun: 4:00 PM - 10:00 PM"],
       color: "from-orange-400 to-red-400",
       action: "none"
     }
@@ -136,12 +136,12 @@ export function ContactSection() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 right-10 w-32 h-32 rounded-full border border-white/5"
+        className="absolute top-20 right-10 w-32 h-32 rounded-full border border-gray-200/20"
       />
       <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-20 left-10 w-48 h-48 rounded-full border border-white/5"
+        className="absolute bottom-20 left-10 w-48 h-48 rounded-full border border-gray-200/20"
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -159,7 +159,7 @@ export function ContactSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 mb-6"
           >
             Get In{" "}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -171,7 +171,7 @@ export function ContactSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
             Ready to embark on your next adventure? Contact our travel experts for personalized service
           </motion.p>
@@ -200,7 +200,7 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ scale: 1.02, x: 10 }}
-                    className={`group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 ${
+                    className={`group bg-white/80 backdrop-blur-lg rounded-2xl p-6 border border-gray-200/50 hover:border-gray-300/70 shadow-lg hover:shadow-xl transition-all duration-300 ${
                       info.action !== "none" ? "cursor-pointer" : ""
                     }`}
                     onClick={() => {
@@ -211,19 +211,19 @@ export function ContactSection() {
                   >
                     <div className="flex items-start gap-4">
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${info.color} p-0.5 flex-shrink-0`}>
-                        <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                          <IconComponent className="w-6 h-6 text-white" />
+                        <div className="w-full h-full bg-white rounded-xl flex items-center justify-center">
+                          <IconComponent className="w-6 h-6 text-slate-700" />
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-white mb-2">{info.title}</h3>
+                        <h3 className="text-lg font-semibold text-slate-800 mb-2">{info.title}</h3>
                         <div className="space-y-1">
                           {info.details.map((detail, idx) => (
                             <motion.p
                               key={idx}
-                              whileHover={info.action === "phone" || info.action === "email" ? { scale: 1.05, color: "#60a5fa" } : {}}
-                              className={`text-gray-300 text-sm transition-colors ${
-                                (info.action === "phone" || info.action === "email") ? "cursor-pointer hover:text-blue-400" : ""
+                              whileHover={info.action === "phone" || info.action === "email" ? { scale: 1.05, color: "#3b82f6" } : {}}
+                              className={`text-gray-600 text-sm transition-colors ${
+                                (info.action === "phone" || info.action === "email") ? "cursor-pointer hover:text-blue-600" : ""
                               }`}
                               onClick={(e) => {
                                 e.stopPropagation();
@@ -234,7 +234,7 @@ export function ContactSection() {
                                 }
                               }}
                             >
-                              {detail}
+                               {(info.action === "phone" || info.action === "email") ? idx + 1 + ") " : ""}{detail}
                             </motion.p>
                           ))}
                         </div>
@@ -255,8 +255,8 @@ export function ContactSection() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="space-y-4"
             >
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-yellow-400" />
+              <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                <Zap className="w-5 h-5 text-yellow-500" />
                 Quick Services
               </h3>
               {quickServices.map((service, index) => {
@@ -269,17 +269,17 @@ export function ContactSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
                     whileHover={{ scale: 1.02, y: -2 }}
-                    className="bg-white/5 backdrop-blur-lg rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
+                    className="bg-white/80 backdrop-blur-lg rounded-xl p-4 border border-gray-200/50 hover:border-gray-300/70 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${service.color} p-0.5`}>
-                        <div className="w-full h-full bg-slate-900 rounded-lg flex items-center justify-center">
-                          <IconComponent className="w-5 h-5 text-white" />
+                        <div className="w-full h-full bg-white rounded-lg flex items-center justify-center">
+                          <IconComponent className="w-5 h-5 text-slate-700" />
                         </div>
                       </div>
                       <div>
-                        <div className="text-white font-medium text-sm">{service.title}</div>
-                        <div className="text-gray-400 text-xs">{service.description}</div>
+                        <div className="text-slate-800 font-medium text-sm">{service.title}</div>
+                        <div className="text-gray-600 text-xs">{service.description}</div>
                       </div>
                     </div>
                   </motion.div>
@@ -297,7 +297,7 @@ export function ContactSection() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+            <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-200/50 shadow-lg">
               
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -311,13 +311,13 @@ export function ContactSection() {
                     whileHover={{ rotate: 10, scale: 1.1 }}
                     className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 p-0.5"
                   >
-                    <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                      <MessageCircle className="w-5 h-5 text-white" />
+                    <div className="w-full h-full bg-white rounded-xl flex items-center justify-center">
+                      <MessageCircle className="w-5 h-5 text-slate-700" />
                     </div>
                   </motion.div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">Send Us a Message</h3>
-                    <p className="text-gray-400 text-sm">Quick response guaranteed</p>
+                    <h3 className="text-2xl font-bold text-slate-800">Send Us a Message</h3>
+                    <p className="text-gray-600 text-sm">Quick response guaranteed</p>
                   </div>
                 </div>
                 
@@ -327,9 +327,9 @@ export function ContactSection() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="inline-flex items-center gap-2 bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm border border-green-500/30"
+                  className="inline-flex items-center gap-2 bg-green-500/20 text-green-600 px-3 py-1 rounded-full text-sm border border-green-500/30"
                 >
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                   We typically respond within 2 hours
                 </motion.div>
               </motion.div>
@@ -343,21 +343,21 @@ export function ContactSection() {
                   className="grid grid-cols-1 sm:grid-cols-2 gap-4"
                 >
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       First Name
                     </label>
                     <Input
                       placeholder="John"
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400"
+                      className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Last Name
                     </label>
                     <Input
                       placeholder="Doe"
-                      className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400"
+                      className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
                     />
                   </div>
                 </motion.div>
@@ -368,13 +368,13 @@ export function ContactSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Email Address
                   </label>
                   <Input
                     type="email"
                     placeholder="john@example.com"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400"
+                    className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
                   />
                 </motion.div>
 
@@ -384,12 +384,12 @@ export function ContactSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Phone Number
                   </label>
                   <Input
                     placeholder="+971 XX XXX XXXX"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400"
+                    className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
                   />
                 </motion.div>
 
@@ -399,13 +399,13 @@ export function ContactSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Message
                   </label>
                   <Textarea
                     placeholder="Tell us about your travel plans..."
                     rows={4}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 focus:border-blue-400 resize-none"
+                    className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 resize-none"
                   />
                 </motion.div>
 
@@ -440,8 +440,8 @@ export function ContactSection() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => handlePhoneCall("+971521110934")}
-                      className="flex items-center justify-center gap-2 bg-green-600/20 border border-green-500/30 text-green-400 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-green-600/30"
+                      onClick={() => handlePhoneCall("+971529969344")}
+                      className="flex items-center justify-center gap-2 bg-green-600/20 border border-green-500/30 text-green-600 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-green-600/30"
                     >
                       <Phone className="w-4 h-4" />
                       Call
@@ -450,7 +450,7 @@ export function ContactSection() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleWhatsApp}
-                      className="flex items-center justify-center gap-2 bg-green-500/20 border border-green-400/30 text-green-300 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-green-500/30"
+                      className="flex items-center justify-center gap-2 bg-green-500/20 border border-green-400/30 text-green-600 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-green-500/30"
                     >
                       <WhatsAppIcon className="w-4 h-4" />
                       Chat with us
@@ -459,7 +459,7 @@ export function ContactSection() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleEmail("reach@airviewtravel.ae")}
-                      className="flex items-center justify-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-400 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-blue-600/30"
+                      className="flex items-center justify-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-600 py-3 rounded-xl font-medium transition-all duration-300 hover:bg-blue-600/30"
                     >
                       <Mail className="w-4 h-4" />
                       Email
@@ -480,7 +480,7 @@ export function ContactSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-16 text-center"
         >
-          <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+          <div className="bg-white/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-200/50 shadow-lg">
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
@@ -488,12 +488,12 @@ export function ContactSection() {
               transition={{ duration: 0.6 }}
               className="max-w-2xl mx-auto"
             >
-              <Globe className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Visit Our Office</h3>
-              <p className="text-lg text-gray-300 mb-2">
+              <Globe className="w-12 h-12 text-blue-500 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">Visit Our Office</h3>
+              <p className="text-lg text-gray-600 mb-2">
                 Shop No.7 Behind Shining Tower, Near Al Khalidiya Mall
               </p>
-              <p className="text-lg text-blue-400 font-semibold">Abu Dhabi - United Arab Emirates</p>
+              <p className="text-lg text-blue-600 font-semibold">Abu Dhabi - United Arab Emirates</p>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className="mt-6"
@@ -501,7 +501,7 @@ export function ContactSection() {
                 <Button
                   variant="outline"
                   onClick={handleMapLocation}
-                  className="bg-white/10 border-white/30 text-white hover:bg-white/20"
+                  className="bg-white/50 border-gray-300 text-slate-800 hover:bg-gray-100/50"
                 >
                   <MapPin className="w-4 h-4 mr-2" />
                   Get Directions

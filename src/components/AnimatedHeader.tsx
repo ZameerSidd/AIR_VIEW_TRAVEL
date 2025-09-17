@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Home, Info, Phone } from "lucide-react";
 import { useState } from "react";
-import exampleLogo from 'figma:asset/36d4afc0a5f2929cd1c0f8dc03fae457132cc1e6.png';
+//import exampleLogo from 'figma:asset/36d4afc0a5f2929cd1c0f8dc03fae457132cc1e6.png';
 
 export function AnimatedHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ export function AnimatedHeader() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-lg border-b border-white/20"
+        className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200"
       >
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
@@ -49,12 +49,12 @@ export function AnimatedHeader() {
                 className="w-12 h-12 rounded-full overflow-hidden bg-white p-1"
               >
                 <img
-                  src={exampleLogo}
+                  src={"images/logo.png"}
                   alt="Air View Travel Logo"
                   className="w-full h-full object-contain rounded-full"
                 />
               </motion.div>
-              <div className="text-white">
+              <div className="text-gray-900">
                 <motion.h1
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -67,7 +67,7 @@ export function AnimatedHeader() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-xs text-gray-300"
+                  className="text-xs text-gray-600"
                 >
                   AND TOURISM - L.L.C
                 </motion.p>
@@ -96,7 +96,7 @@ export function AnimatedHeader() {
                     }}
                     whileTap={{ scale: 0.95 }}
                     onClick={item.action}
-                    className="flex items-center gap-2 text-white hover:text-blue-400 transition-all duration-300 font-medium"
+                    className="flex items-center gap-2 text-gray-900 hover:text-blue-600 transition-all duration-300 font-medium"
                   >
                     <IconComponent className="w-4 h-4" />
                     <span>{item.label}</span>
@@ -113,7 +113,7 @@ export function AnimatedHeader() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-white p-2 rounded-lg bg-white/20 backdrop-blur-sm transition-all duration-300"
+              className="md:hidden text-gray-900 p-2 rounded-lg bg-gray-100/80 backdrop-blur-sm transition-all duration-300"
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -185,7 +185,7 @@ export function AnimatedHeader() {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-1">
                       <img
-                        src={exampleLogo}
+                        src="images/logo.png"
                         alt="Air View Travel Logo"
                         className="w-full h-full object-contain rounded-full"
                       />

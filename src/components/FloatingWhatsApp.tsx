@@ -15,7 +15,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 const FloatingWhatsApp = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const whatsappNumber = "+971521110934";
+  const whatsappNumber = "+971529969344";
   const defaultMessage = "Hello! I'm interested in your travel services. Could you please provide more information?";
 
   const handleWhatsAppClick = () => {

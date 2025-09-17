@@ -45,12 +45,12 @@ export function VisionMissionSection() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-        className="absolute top-10 left-10 w-64 h-64 rounded-full border border-white/5"
+        className="absolute top-10 left-10 w-64 h-64 rounded-full border border-gray-200/50"
       />
       <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-10 right-10 w-80 h-80 rounded-full border border-white/5"
+        className="absolute bottom-10 right-10 w-80 h-80 rounded-full border border-gray-200/50"
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -68,14 +68,14 @@ export function VisionMissionSection() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
           >
             Our{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Vision
             </span>{" "}
             &{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
               Mission
             </span>
           </motion.h2>
@@ -84,7 +84,7 @@ export function VisionMissionSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
             Driven by passion for travel and commitment to excellence, we shape the future of travel experiences
           </motion.p>
@@ -114,18 +114,18 @@ export function VisionMissionSection() {
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 p-0.5"
                 >
-                  <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                    <Eye className="w-6 h-6 text-white" />
+                  <div className="w-full h-full bg-white rounded-xl flex items-center justify-center shadow-lg">
+                    <Eye className="w-6 h-6 text-gray-900" />
                   </div>
                 </motion.div>
-                <h3 className="text-3xl font-bold text-white">Our Vision</h3>
+                <h3 className="text-3xl font-bold text-gray-900">Our Vision</h3>
               </div>
               <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-lg text-gray-300 leading-relaxed"
+                className="text-lg text-gray-600 leading-relaxed"
               >
                 To be the most trusted and innovative travel company in the UAE, 
                 empowering dreams and connecting cultures through exceptional travel experiences.
@@ -144,19 +144,19 @@ export function VisionMissionSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                     whileHover={{ x: 10, transition: { duration: 0.2 } }}
-                    className="group bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-blue-400/30 transition-all duration-300"
+                    className="group bg-white/90 backdrop-blur-lg rounded-xl p-6 border border-gray-200 hover:border-blue-400/50 transition-all duration-300 shadow-lg"
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 p-0.5 flex-shrink-0">
-                        <div className="w-full h-full bg-slate-900 rounded-lg flex items-center justify-center">
-                          <IconComponent className="w-5 h-5 text-white" />
+                        <div className="w-full h-full bg-white rounded-lg flex items-center justify-center shadow-sm">
+                          <IconComponent className="w-5 h-5 text-gray-900" />
                         </div>
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                        <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
                           {point.title}
                         </h4>
-                        <p className="text-gray-300 text-sm leading-relaxed">
+                        <p className="text-gray-600 text-sm leading-relaxed">
                           {point.description}
                         </p>
                       </div>
@@ -189,18 +189,18 @@ export function VisionMissionSection() {
                   whileHover={{ scale: 1.1, rotate: -5 }}
                   className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 p-0.5"
                 >
-                  <div className="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center">
-                    <Target className="w-6 h-6 text-white" />
+                  <div className="w-full h-full bg-white rounded-xl flex items-center justify-center shadow-lg">
+                    <Target className="w-6 h-6 text-gray-900" />
                   </div>
                 </motion.div>
-                <h3 className="text-3xl font-bold text-white">Our Mission</h3>
+                <h3 className="text-3xl font-bold text-gray-900">Our Mission</h3>
               </div>
               <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-lg text-gray-300 leading-relaxed"
+                className="text-lg text-gray-600 leading-relaxed"
               >
                 To deliver personalized, hassle-free travel solutions while maintaining 
                 the highest standards of service, integrity, and customer satisfaction.
@@ -219,19 +219,19 @@ export function VisionMissionSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                     whileHover={{ x: -10, transition: { duration: 0.2 } }}
-                    className="group bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-purple-400/30 transition-all duration-300"
+                    className="group bg-white/90 backdrop-blur-lg rounded-xl p-6 border border-gray-200 hover:border-purple-400/50 transition-all duration-300 shadow-lg"
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 p-0.5 flex-shrink-0">
-                        <div className="w-full h-full bg-slate-900 rounded-lg flex items-center justify-center">
-                          <IconComponent className="w-5 h-5 text-white" />
+                        <div className="w-full h-full bg-white rounded-lg flex items-center justify-center shadow-sm">
+                          <IconComponent className="w-5 h-5 text-gray-900" />
                         </div>
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                        <h4 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                           {point.title}
                         </h4>
-                        <p className="text-gray-300 text-sm leading-relaxed">
+                        <p className="text-gray-600 text-sm leading-relaxed">
                           {point.description}
                         </p>
                       </div>
@@ -252,13 +252,13 @@ export function VisionMissionSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-center mt-20"
         >
-          <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 backdrop-blur-lg rounded-2xl p-8 border border-white/10 max-w-4xl mx-auto">
+          <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 backdrop-blur-lg rounded-2xl p-8 border border-gray-200 max-w-4xl mx-auto shadow-lg">
             <motion.blockquote
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-2xl font-medium text-white italic mb-4"
+              className="text-2xl font-medium text-gray-900 italic mb-4"
             >
               "Every journey begins with a single step, and we're here to make sure 
               every step of your travel experience is extraordinary."
@@ -268,7 +268,7 @@ export function VisionMissionSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="text-gray-400 not-italic"
+              className="text-gray-600 not-italic"
             >
               — Air View Travel Team
             </motion.cite>
