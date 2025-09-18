@@ -12,7 +12,8 @@ import {
   Briefcase,
   CreditCard,
   Clock,
-  Home
+  Home,
+  ClockIcon
 } from "lucide-react";
 import {
   FlightImage,
@@ -24,6 +25,7 @@ import {
   AttestationImage,
   CityToursImage,
   TripPlanningImage,
+  VisaExtensionImage,
   UmrahImage
 } from "./images";
 
@@ -93,14 +95,22 @@ export function AnimatedServices() {
       color: "from-teal-500 to-green-500",
       image: CityToursImage
     },
-    // {
-    //   icon: Briefcase,
-    //   title: "Trip Organization",
-    //   subtitle: "Business & Leisure",
-    //   description: "Complete trip planning and organization services",
-    //   color: "from-pink-500 to-purple-500",
-    //   image: TripPlanningImage
-    // },
+    {
+      icon: Briefcase,
+      title: "Trip Organization",
+      subtitle: "Business & Leisure",
+      description: "Complete trip planning and organization services",
+      color: "from-pink-500 to-purple-500",
+      image: TripPlanningImage
+    },
+   {
+      icon: ClockIcon, // or ClockIcon, CalendarIcon
+      title: "Visa Extension",
+      subtitle: "Extend Your Stay with Ease",
+      description: "Hassle-free processing for your visa renewal",
+      color: "from-pink-500 to-purple-500",
+      image: VisaExtensionImage
+    },
     {
       icon: Home,
       title: "Umrah Packages",
