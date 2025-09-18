@@ -26,9 +26,8 @@ const SplashScreen = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center z-50 overflow-hidden"
+      className="fixed inset-0 bg-gradient-to-br from-white via-gray-100 to-gray-200 flex items-center justify-center z-50 overflow-hidden"
     >
-      
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Planes */}
@@ -41,7 +40,7 @@ const SplashScreen = () => {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-20 left-0"
         >
-          <Plane className="w-8 h-8 text-white/20" />
+          <Plane className="w-8 h-8 text-gray-400/40" />
         </motion.div>
         
         <motion.div
@@ -53,7 +52,7 @@ const SplashScreen = () => {
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-40 right-0"
         >
-          <Plane className="w-6 h-6 text-white/15" />
+          <Plane className="w-6 h-6 text-gray-300/30" />
         </motion.div>
 
         {/* Floating Globes */}
@@ -62,7 +61,7 @@ const SplashScreen = () => {
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           className="absolute bottom-40 left-20"
         >
-          <Globe className="w-12 h-12 text-white/10" />
+          <Globe className="w-12 h-12 text-blue-300/30" />
         </motion.div>
 
         {/* Twinkling Stars */}
@@ -79,13 +78,13 @@ const SplashScreen = () => {
               delay: i * 0.5,
               ease: "easeInOut"
             }}
-            className="absolute text-yellow-400/40"
+            className="absolute"
             style={{
               top: `${15 + i * 10}%`,
               left: `${10 + i * 10}%`,
             }}
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-yellow-500/50" />
           </motion.div>
         ))}
       </div>
@@ -115,7 +114,7 @@ const SplashScreen = () => {
               repeat: Infinity,
               ease: "easeInOut" 
             }}
-            className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden relative bg-white p-2"
+            className="w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden relative bg-white p-2 shadow-lg border border-gray-200"
           >
             <motion.img
               src={"images/logo.png"}
@@ -135,7 +134,7 @@ const SplashScreen = () => {
                 repeat: Infinity,
                 ease: "easeInOut" 
               }}
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-full blur-md"
+              className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-md"
             />
           </motion.div>
           
@@ -144,7 +143,7 @@ const SplashScreen = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.5 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-2"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-2"
           >
             <motion.span
               initial={{ opacity: 0, y: 20 }}
@@ -158,7 +157,7 @@ const SplashScreen = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.9 }}
-              className="inline-block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"
             >
               TRAVEL
             </motion.span>
@@ -168,7 +167,7 @@ const SplashScreen = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2.1 }}
-            className="text-lg text-blue-300"
+            className="text-lg text-gray-600"
           >
             AND TOURISM - L.L.C
           </motion.p>
@@ -181,10 +180,9 @@ const SplashScreen = () => {
           transition={{ duration: 0.6, delay: 2.3 }}
           className="w-80 max-w-sm mx-auto"
         >
-          
           {/* Progress Bar */}
           <div className="relative mb-6">
-            <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden backdrop-blur-sm">
+            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden backdrop-blur-sm">
               <motion.div
                 animate={{ width: `${loadingProgress}%` }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
@@ -198,7 +196,7 @@ const SplashScreen = () => {
                     repeat: Infinity,
                     ease: "easeInOut" 
                   }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
                 />
               </motion.div>
             </div>
@@ -209,7 +207,7 @@ const SplashScreen = () => {
               transition={{ duration: 1, repeat: Infinity }}
               className="absolute -top-8 left-1/2 transform -translate-x-1/2"
             >
-              <span className="text-white font-semibold text-sm">
+              <span className="text-gray-800 font-semibold text-sm">
                 {loadingProgress}%
               </span>
             </motion.div>
@@ -228,7 +226,7 @@ const SplashScreen = () => {
                 <motion.p
                   animate={{ opacity: [0.7, 1, 0.7] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="text-white/80 text-sm mb-2"
+                  className="text-gray-700 text-sm mb-2"
                 >
                   {loadingProgress < 30 && "Initializing your travel experience..."}
                   {loadingProgress >= 30 && loadingProgress < 60 && "Loading premium services..."}
@@ -247,7 +245,7 @@ const SplashScreen = () => {
                         repeat: Infinity,
                         delay: i * 0.2
                       }}
-                      className="w-2 h-2 bg-blue-400 rounded-full"
+                      className="w-2 h-2 bg-blue-500 rounded-full"
                     />
                   ))}
                 </div>
@@ -267,10 +265,10 @@ const SplashScreen = () => {
                 >
                   ✈️
                 </motion.div>
-                <p className="text-white font-semibold text-lg">
+                <p className="text-gray-900 font-semibold text-lg">
                   Welcome Aboard!
                 </p>
-                <p className="text-blue-300 text-sm">
+                <p className="text-gray-600 text-sm">
                   Your journey begins now...
                 </p>
               </motion.div>
@@ -283,21 +281,20 @@ const SplashScreen = () => {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-20 left-20 w-32 h-32 border border-white/10 rounded-full"
+        className="absolute top-20 left-20 w-32 h-32 border border-gray-300/20 rounded-full"
       />
       
       <motion.div
         animate={{ rotate: -360 }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-20 right-20 w-40 h-40 border border-white/5 rounded-full"
+        className="absolute bottom-20 right-20 w-40 h-40 border border-gray-300/10 rounded-full"
       />
       
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-white/5 rounded-full"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-gray-300/10 rounded-full"
       />
-
     </motion.div>
   );
 };
