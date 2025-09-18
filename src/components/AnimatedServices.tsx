@@ -136,7 +136,7 @@ export function AnimatedServices() {
     hidden: { 
       opacity: 0, 
       y: 50,
-      scale: 0.8
+      scale: 0.8 
     },
     visible: {
       opacity: 1,
@@ -144,7 +144,7 @@ export function AnimatedServices() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: [0.42, 0, 0.58, 1] as const, // Corrected to a cubic bezier array
       }
     }
   };
