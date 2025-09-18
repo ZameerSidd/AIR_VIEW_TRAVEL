@@ -67,8 +67,15 @@ export const CityToursImage = () => (
 
 export const TripPlanningImage = () => (
   <img 
-    src="images/trip-organisation"
+    src="images/trip-organization.jpeg"
     alt="Trip Planning"
+    className="w-full h-full object-cover"
+  />
+);
+export const VisaExtensionImage = () => (
+  <img 
+    src="images/Visa-Extension.jpeg"
+    alt="Visa Extension"
     className="w-full h-full object-cover"
   />
 );

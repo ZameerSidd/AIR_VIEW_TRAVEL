@@ -58,7 +58,7 @@ export function ContactSection() {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+971 2 442 0602", "+971 52 111 0934", "+971 52 111 0934"],
+      details: ["+971 2 442 0602", "+971 52 111 0932", "+971 52 111 0934"],
       color: "from-green-400 to-emerald-400",
       action: "phone"
     },

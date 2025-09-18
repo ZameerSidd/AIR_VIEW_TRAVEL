@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Home, Info, Phone } from "lucide-react";
+import { Menu, X, Home, Info, Phone, ServerIcon } from "lucide-react";
 import { useState } from "react";
 //import exampleLogo from 'figma:asset/36d4afc0a5f2929cd1c0f8dc03fae457132cc1e6.png';
 
@@ -22,7 +22,8 @@ export function AnimatedHeader() {
   const navigationItems = [
     { id: 'home', label: 'Home', icon: Home, action: scrollToTop },
     { id: 'about', label: 'About Us', icon: Info, action: () => scrollToSection('about') },
-    { id: 'contact', label: 'Contact Us', icon: Phone, action: () => scrollToSection('contact') }
+    { id: 'contact', label: 'Contact Us', icon: Phone, action: () => scrollToSection('contact') },
+    { id: 'Service', label: 'Service', icon: ServerIcon, action: () => scrollToSection('services') }
   ];
 
   return (
