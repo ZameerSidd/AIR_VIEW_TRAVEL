@@ -1,10 +1,20 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Home, Info, Phone, ServerIcon } from "lucide-react";
-import { useState } from "react";
-//import exampleLogo from 'figma:asset/36d4afc0a5f2929cd1c0f8dc03fae457132cc1e6.png';
+import { Menu, X, Home, Info, Phone, Briefcase } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function AnimatedHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -21,9 +31,9 @@ export function AnimatedHeader() {
 
   const navigationItems = [
     { id: 'home', label: 'Home', icon: Home, action: scrollToTop },
+    { id: 'services', label: 'Our Services', icon: Briefcase, action: () => scrollToSection('services') },
     { id: 'about', label: 'About Us', icon: Info, action: () => scrollToSection('about') },
-    { id: 'contact', label: 'Contact Us', icon: Phone, action: () => scrollToSection('contact') },
-    { id: 'Service', label: 'Service', icon: ServerIcon, action: () => scrollToSection('services') }
+    { id: 'contact', label: 'Contact Us', icon: Phone, action: () => scrollToSection('contact') }
   ];
 
   return (
@@ -32,7 +42,11 @@ export function AnimatedHeader() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-200"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-md' 
+            : 'bg-transparent border-b border-white/10'
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
@@ -47,7 +61,9 @@ export function AnimatedHeader() {
               <motion.div
                 whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.6 }}
-                className="w-12 h-12 rounded-full overflow-hidden bg-white p-1"
+                className={`w-12 h-12 rounded-full overflow-hidden p-1 transition-all duration-500 ${
+                  isScrolled ? 'bg-white shadow-lg' : 'bg-white/90 shadow-2xl'
+                }`}
               >
                 <img
                   src={"images/logo.png"}
@@ -55,20 +71,36 @@ export function AnimatedHeader() {
                   className="w-full h-full object-contain rounded-full"
                 />
               </motion.div>
-              <div className="text-gray-900">
+              <div>
                 <motion.h1
                   initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
+                  animate={{ 
+                    x: 0, 
+                    opacity: 1,
+                    color: isScrolled ? "#111827" : "#ffffff"
+                  }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-bold text-lg leading-tight"
+                  style={{
+                    color: isScrolled ? "#111827" : "#ffffff",
+                    textShadow: isScrolled ? "none" : "0 2px 8px rgba(0,0,0,0.5)"
+                  }}
                 >
                   AIR VIEW TRAVEL
                 </motion.h1>
                 <motion.p
                   initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
+                  animate={{ 
+                    x: 0, 
+                    opacity: 1,
+                    color: isScrolled ? "#4b5563" : "#f3f4f6"
+                  }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-xs text-gray-600"
+                  className="text-xs"
+                  style={{
+                    color: isScrolled ? "#4b5563" : "#f3f4f6",
+                    textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.4)"
+                  }}
                 >
                   AND TOURISM - L.L.C
                 </motion.p>
@@ -88,16 +120,26 @@ export function AnimatedHeader() {
                   <motion.button
                     key={item.id}
                     initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={{ 
+                      opacity: 1, 
+                      y: 0,
+                      color: isScrolled ? "#111827" : "#ffffff"
+                    }}
                     transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
                     whileHover={{ 
-                      scale: 1.05, 
-                      color: "#60a5fa",
+                      scale: 1.05,
                       y: -2
                     }}
                     whileTap={{ scale: 0.95 }}
                     onClick={item.action}
-                    className="flex items-center gap-2 text-gray-900 hover:text-blue-600 transition-all duration-300 font-medium"
+                    className={`flex items-center gap-2 transition-colors duration-500 font-medium ${
+                      isScrolled 
+                        ? 'text-gray-900 hover:text-blue-600 [text-shadow:none]' 
+                        : 'text-white hover:text-blue-300 [text-shadow:0_2px_8px_rgba(0,0,0,0.5)]'
+                    }`}
+                    style={{
+                      color: isScrolled ? "#111827" : "#ffffff"
+                    }}
                   >
                     <IconComponent className="w-4 h-4" />
                     <span>{item.label}</span>
@@ -114,7 +156,11 @@ export function AnimatedHeader() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-gray-900 p-2 rounded-lg bg-gray-100/80 backdrop-blur-sm transition-all duration-300"
+              className={`md:hidden p-2 rounded-lg backdrop-blur-sm transition-all duration-500 ${
+                isScrolled 
+                  ? 'text-gray-900 bg-gray-100/80' 
+                  : 'text-white bg-white/20'
+              }`}
             >
               <AnimatePresence mode="wait">
                 {isMobileMenuOpen ? (
@@ -148,7 +194,11 @@ export function AnimatedHeader() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.2, delay: 0.8 }}
-          className="h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent"
+          className={`h-0.5 transition-all duration-500 ${
+            isScrolled
+              ? 'bg-gradient-to-r from-transparent via-blue-400 to-transparent'
+              : 'bg-gradient-to-r from-transparent via-white/30 to-transparent'
+          }`}
           style={{ transformOrigin: "center" }}
         />
       </motion.header>
@@ -186,7 +236,7 @@ export function AnimatedHeader() {
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-1">
                       <img
-                        src="images/logo.png"
+                        src={"images/logo.png"}
                         alt="Air View Travel Logo"
                         className="w-full h-full object-contain rounded-full"
                       />
@@ -238,6 +288,7 @@ export function AnimatedHeader() {
                           <div className="font-medium">{item.label}</div>
                           <div className="text-xs text-gray-400 mt-1">
                             {item.id === 'home' && 'Back to top'}
+                            {item.id === 'services' && 'Explore our offerings'}
                             {item.id === 'about' && 'Learn more about us'}
                             {item.id === 'contact' && 'Get in touch'}
                           </div>
