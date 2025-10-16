@@ -1,47 +1,64 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
-import { Button } from "./ui/button";
-import { ChevronDown, Sparkles, Globe, Plane } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { carouselImages } from "../assets/img";
 
 export function AnimatedHero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  const backgroundImages = [
-    "https://images.unsplash.com/photo-1759531161673-ee4844ccd377?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjB0cmF2ZWwlMjBkZXN0aW5hdGlvbnxlbnwxfHx8fDE3NjAyNTU2MDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    "https://images.unsplash.com/photo-1661455335481-6e47865861dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaXJwbGFuZSUyMGNsb3VkcyUyMGZsaWdodHxlbnwxfHx8fDE3NjAzMzUyMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    "https://images.unsplash.com/photo-1678687114989-ad452a24f289?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWFjaCUyMHJlc29ydCUyMHZhY2F0aW9ufGVufDF8fHx8MTc2MDMzNDI1MXww&ixlib=rb-4.1.0&q=80&w=1080",
-    "https://images.unsplash.com/photo-1676749467818-d26fea82be0a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaXR5c2NhcGUlMjB0cmF2ZWwlMjBza3lsaW5lfGVufDF8fHx8MTc2MDMzNTIzN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+  const carouselSlides = [
+    {
+      image: carouselImages.travelInsurance,
+      title: "Travel Insurance",
+      description: "Comprehensive coverage for your peace of mind during every journey"
+    },
+    {
+      image: carouselImages.holidayPackages,
+      title: "Holiday Packages",
+      description: "Curated vacation experiences to destinations around the world"
+    },
+    {
+      image: carouselImages.hotelBooking,
+      title: "Hotel Booking",
+      description: "Luxury accommodations and best rates for your perfect stay"
+    },
+    {
+      image: carouselImages.corporateTravel,
+      title: "Corporate Travel",
+      description: "Professional business travel solutions tailored to your company needs"
+    }
   ];
+
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-    }, 3000); // Change every 3 seconds
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselSlides.length);
+    }, 6000); // Change every 6 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [carouselSlides.length]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const goToPrevious = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? carouselSlides.length - 1 : prevIndex - 1
+    );
   };
 
-  const floatingAnimation = {
-    y: [0, -10, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
+  const goToNext = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentImageIndex((prevIndex) => 
+      (prevIndex + 1) % carouselSlides.length
+    );
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       
       {/* Background Image Carousel Slider */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false} custom={currentImageIndex}>
           <motion.div
             key={currentImageIndex}
@@ -57,28 +74,12 @@ export function AnimatedHero() {
           >
             <div 
               className="w-full h-full bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${backgroundImages[currentImageIndex]})` }}
+              style={{ backgroundImage: `url(${carouselSlides[currentImageIndex].image})` }}
             />
             {/* Overlay for better text visibility */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/40 to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60" />
           </motion.div>
         </AnimatePresence>
-        
-        {/* Carousel Indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-          {backgroundImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentImageIndex(index)}
-              className={`transition-all duration-300 rounded-full ${
-                index === currentImageIndex 
-                  ? 'w-8 h-2 bg-white' 
-                  : 'w-2 h-2 bg-white/50 hover:bg-white/75'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
       </div>
 
       {/* Animated Background Circles */}
@@ -109,173 +110,83 @@ export function AnimatedHero() {
         className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-3xl z-5"
       />
 
-      <div className="max-w-6xl mx-auto text-center relative z-10">
-        
-        {/* Company Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-8"
-        >
-
-        </motion.div>
-        
-        {/* Main Title with Staggered Animation */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="mb-6"
-        >
-          <motion.h1
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 drop-shadow-2xl"
-          >
-            <motion.span
-              initial={{ display: "inline-block", y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="inline-block"
-            >
-              Your
-            </motion.span>{" "}
-            <motion.span
-              initial={{ display: "inline-block", y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="inline-block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
-            >
-              Travel
-            </motion.span>{" "}
-            <motion.span
-              initial={{ display: "inline-block", y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.1 }}
-              className="inline-block"
-            >
-              Dreams
-            </motion.span>
-            <br />
-            <motion.span
-              initial={{ display: "inline-block", y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.3 }}
-              className="inline-block bg-gradient-to-r from-amber-400 to-red-400 bg-clip-text text-transparent"
-            >
-              Come True
-            </motion.span>
-          </motion.h1>
-        </motion.div>
-
-        {/* Subtitle */}
-        <motion.p
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
-        >
-          Experience the world with our comprehensive travel services. From visa assistance to luxury accommodations, we make your journey unforgettable.
-        </motion.p>
-
-        {/* Animated Stats */}
-        <motion.div
-          initial={{ y: 40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.7 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-2xl mx-auto"
-        >
-          {[
-            { number: "50+", label: "Countries", icon: Globe },
-            { number: "1000+", label: "Happy Clients", icon: Sparkles },
-            { number: "24/7", label: "Support", icon: Plane },
-            { number: "15+", label: "Years Experience", icon: Sparkles },
-          ].map((stat, index) => {
-            const IconComponent = stat.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6, delay: 1.9 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="bg-white/90 backdrop-blur-md rounded-lg p-4 border border-white/30 shadow-2xl"
-              >
-                <motion.div
-                  animate={floatingAnimation}
-                  className="text-center"
-                >
-                  <IconComponent className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                  <div className="text-2xl font-bold text-gray-900">{stat.number}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* Action Buttons */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-        >
+      {/* Content - Title and Description */}
+      <div className="relative z-10 text-center px-4">
+        <AnimatePresence mode="wait">
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            key={currentImageIndex}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-4xl mx-auto"
           >
-            <Button
-              size="lg"
-              onClick={() => scrollToSection('services')}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300"
+            <motion.h1
+              className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 drop-shadow-2xl"
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.6 }}
             >
-              <Sparkles className="w-5 h-5 mr-2" />
-              Explore Services
-            </Button>
-          </motion.div>
-          
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => scrollToSection('contact')}
-              className="bg-white/90 border-white/50 text-gray-900 hover:bg-white px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-md transition-all duration-300 shadow-2xl"
+              {carouselSlides[currentImageIndex].title}
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-3xl text-white/90 drop-shadow-lg max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <Plane className="w-5 h-5 mr-2" />
-              Contact Us
-            </Button>
+              {carouselSlides[currentImageIndex].description}
+            </motion.p>
           </motion.div>
-        </motion.div>
+        </AnimatePresence>
+      </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 2.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{
-              y: [0, 10, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="flex flex-col items-center text-white/80 cursor-pointer drop-shadow-lg"
-            onClick={() => scrollToSection('services')}
-          >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <ChevronDown className="w-6 h-6" />
-          </motion.div>
-        </motion.div>
+      {/* Navigation Buttons - Left */}
+      <motion.button
+        type="button"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        whileHover={{ scale: 1.1, x: -5, backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+        whileTap={{ scale: 0.95 }}
+        onClick={goToPrevious}
+        className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-md text-white p-3 md:p-4 rounded-full border-2 border-white/40 transition-all duration-300 shadow-2xl cursor-pointer hover:shadow-3xl"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
+      </motion.button>
+
+      {/* Navigation Buttons - Right */}
+      <motion.button
+        type="button"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        whileHover={{ scale: 1.1, x: 5, backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+        whileTap={{ scale: 0.95 }}
+        onClick={goToNext}
+        className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-md text-white p-3 md:p-4 rounded-full border-2 border-white/40 transition-all duration-300 shadow-2xl cursor-pointer hover:shadow-3xl"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={3} />
+      </motion.button>
+
+      {/* Carousel Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+        {carouselSlides.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => setCurrentImageIndex(index)}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`transition-all duration-300 rounded-full ${
+              index === currentImageIndex 
+                ? 'w-12 h-3 bg-white shadow-lg' 
+                : 'w-3 h-3 bg-white/50 hover:bg-white/75'
+            }`}
+            aria-label={`Go to slide ${index + 1}: ${carouselSlides[index].title}`}
+          />
+        ))}
       </div>
     </section>
   );
