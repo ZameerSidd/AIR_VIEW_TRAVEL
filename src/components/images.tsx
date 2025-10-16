@@ -1,6 +1,3 @@
-// Service Images Components
-import React from 'react';
-
 export const FlightImage = () => (
   <img 
     src="images/Flight-Tickets.jpeg"
