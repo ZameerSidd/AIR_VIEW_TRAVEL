@@ -1,16 +1,22 @@
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { carouselImages } from "../assets/img";
 
 export function AnimatedHero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const carouselSlides = [
     {
       image: carouselImages.travelInsurance,
       title: "Travel Insurance",
       description: "Comprehensive coverage for your peace of mind during every journey"
+    },
+    {
+      image: carouselImages.corporateTravel,
+      title: "Corporate Travel",
+      description: "Professional business travel solutions tailored to your company needs"
     },
     {
       image: carouselImages.holidayPackages,
@@ -23,19 +29,68 @@ export function AnimatedHero() {
       description: "Luxury accommodations and best rates for your perfect stay"
     },
     {
-      image: carouselImages.corporateTravel,
-      title: "Corporate Travel",
-      description: "Professional business travel solutions tailored to your company needs"
+      image: carouselImages.flightBooking,
+      title: "Flight Booking",
+      description: "Seamless air ticket booking with the best fares and routes worldwide"
+    },
+    {
+      image: carouselImages.globalVisa,
+      title: "Global Visa Assistance",
+      description: "Expert visa processing services for destinations around the world"
+    },
+    {
+      image: carouselImages.uaeVisa,
+      title: "UAE Tourist Visa",
+      description: "Fast and hassle-free UAE tourist visa services"
+    },
+    {
+      image: carouselImages.documentAttestation,
+      title: "Document Attestation",
+      description: "Professional document attestation and legalization services"
+    },
+    {
+      image: carouselImages.cityTours,
+      title: "City Tours",
+      description: "Explore breathtaking destinations with our curated city tour packages"
+    },
+    {
+      image: carouselImages.tripPlanning,
+      title: "Trip Planning",
+      description: "Customized travel itineraries tailored to your preferences"
+    },
+    {
+      image: carouselImages.visaExtension,
+      title: "Visa Extension",
+      description: "Efficient visa extension and renewal services"
+    },
+    {
+      image: carouselImages.umrahPackages,
+      title: "Umrah Packages",
+      description: "Comprehensive Umrah packages for a blessed spiritual journey"
     }
   ];
 
-
-  useEffect(() => {
-    const interval = setInterval(() => {
+  // Function to start the auto-advance timer
+  const startTimer = () => {
+    // Clear any existing timer
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    
+    // Start new timer
+    intervalRef.current = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselSlides.length);
     }, 6000); // Change every 6 seconds
+  };
 
-    return () => clearInterval(interval);
+  useEffect(() => {
+    startTimer();
+    
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [carouselSlides.length]);
 
   const goToPrevious = (e: React.MouseEvent) => {
@@ -44,6 +99,8 @@ export function AnimatedHero() {
     setCurrentImageIndex((prevIndex) => 
       prevIndex === 0 ? carouselSlides.length - 1 : prevIndex - 1
     );
+    // Reset timer to zero
+    startTimer();
   };
 
   const goToNext = (e: React.MouseEvent) => {
@@ -52,6 +109,14 @@ export function AnimatedHero() {
     setCurrentImageIndex((prevIndex) => 
       (prevIndex + 1) % carouselSlides.length
     );
+    // Reset timer to zero
+    startTimer();
+  };
+  
+  const goToSlide = (index: number) => {
+    setCurrentImageIndex(index);
+    // Reset timer to zero
+    startTimer();
   };
 
   return (
@@ -176,7 +241,7 @@ export function AnimatedHero() {
         {carouselSlides.map((_, index) => (
           <motion.button
             key={index}
-            onClick={() => setCurrentImageIndex(index)}
+            onClick={() => goToSlide(index)}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
             className={`transition-all duration-300 rounded-full ${
