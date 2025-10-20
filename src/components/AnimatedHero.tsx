@@ -148,7 +148,7 @@ export function AnimatedHero() {
       </div>
 
       {/* Animated Background Circles */}
-      <motion.div
+      {/* <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
         className="absolute -top-20 -left-20 w-40 h-40 rounded-full border border-white/20 z-5"
@@ -173,7 +173,7 @@ export function AnimatedHero() {
         }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-1/4 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 blur-3xl z-5"
-      />
+      /> */}
 
       {/* Content - Title and Description */}
       <div className="relative z-10 text-center px-4">

@@ -48,29 +48,23 @@ export function AnimatedHeader() {
             : 'bg-transparent border-b border-white/10'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 py-3">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo Section */}
+            {/* Logo and Company Name Section */}
             <motion.div
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex items-center gap-3 cursor-pointer"
+              className="flex items-center gap-4 cursor-pointer"
               onClick={scrollToTop}
             >
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-                className={`w-12 h-12 rounded-full overflow-hidden p-1 transition-all duration-500 ${
-                  isScrolled ? 'bg-white shadow-lg' : 'bg-white/90 shadow-2xl'
-                }`}
-              >
-                <img
-                  src={"images/logo.png"}
-                  alt="Air View Travel Logo"
-                  className="w-full h-full object-contain rounded-full"
-                />
-              </motion.div>
+              <motion.img
+                src={"images/header_logo.jpg"}
+                alt="Air View Travel Logo"
+                className="h-16 w-16 md:h-20 md:w-20 object-contain"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              />
               <div>
                 <motion.h1
                   initial={{ x: -50, opacity: 0 }}
@@ -80,7 +74,7 @@ export function AnimatedHeader() {
                     color: isScrolled ? "#111827" : "#ffffff"
                   }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="font-bold text-lg leading-tight"
+                  className="font-bold text-lg md:text-xl leading-tight"
                   style={{
                     color: isScrolled ? "#111827" : "#ffffff",
                     textShadow: isScrolled ? "none" : "0 2px 8px rgba(0,0,0,0.5)"
@@ -96,7 +90,7 @@ export function AnimatedHeader() {
                     color: isScrolled ? "#4b5563" : "#f3f4f6"
                   }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-xs"
+                  className="text-xs md:text-sm"
                   style={{
                     color: isScrolled ? "#4b5563" : "#f3f4f6",
                     textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.4)"
@@ -234,13 +228,11 @@ export function AnimatedHeader() {
               <div className="p-6 border-b border-white/10">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-1">
-                      <img
-                        src={"images/logo.png"}
-                        alt="Air View Travel Logo"
-                        className="w-full h-full object-contain rounded-full"
-                      />
-                    </div>
+                    <img
+                      src={"images/header_logo.jpg"}
+                      alt="Air View Travel Logo"
+                      className="h-12 w-12 object-contain"
+                    />
                     <div className="text-white">
                       <h2 className="font-bold text-sm">AIR VIEW TRAVEL</h2>
                       <p className="text-xs text-gray-300">AND TOURISM - L.L.C</p>
