@@ -17,5 +17,6 @@ export const carouselImages = {
   cityTours: getAssetPath("/images/City-tour.jpeg"),
   tripPlanning: getAssetPath("/images/trip-organization.jpeg"),
   visaExtension: getAssetPath("/images/Visa-Extension.jpeg"),
-  umrahPackages: getAssetPath("/images/Umrah-Packages.jpeg")
+  umrahPackages: getAssetPath("/images/Umrah-Packages.jpeg"),
+  logo: getAssetPath("/images/logo.png")
 };
