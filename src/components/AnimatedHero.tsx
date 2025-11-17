@@ -137,9 +137,15 @@ export function AnimatedHero() {
             }}
             className="absolute inset-0"
           >
-            <div 
-              className="w-full h-full bg-cover bg-center bg-no-repeat"
+            {/* <div 
+              className="w-full h-full bg-cover bg-top sm:bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${carouselSlides[currentImageIndex].image})` }}
+            /> */}
+                 <img
+              src={carouselSlides[currentImageIndex].image}
+              alt={carouselSlides[currentImageIndex].title}
+              className="w-full h-full object-cover object-top sm:object-center"
+              draggable={false}
             />
             {/* Overlay for better text visibility */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60" />

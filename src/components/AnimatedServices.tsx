@@ -35,7 +35,7 @@ export function AnimatedServices() {
       icon: Plane,
       title: "Flight Tickets",
       subtitle: "Best Deals Worldwide",
-      description: "Book domestic and international flights at competitive prices",
+      description: "Air View, a Dubai-based online travel agency, offers seamless flight bookings and tailored travel services. Enjoy a user-friendly platform, personalized packages, competitive fares, reward points on every booking, and reliable customer support via phone, email, or live chat—making Air View a smart choice for every traveler.",
       color: "from-blue-500 to-cyan-500",
       image: FlightImage
     },
@@ -43,7 +43,7 @@ export function AnimatedServices() {
       icon: Globe,
       title: "Global Visa Assistance",
       subtitle: "Worldwide Visa Support",
-      description: "Complete visa processing for all international destinations",
+      description: "Air View offers reliable worldwide visa support, handling complete visa processing for all major international destinations. From documentation guidance to application submission, our team ensures a smooth, stress-free experience. Whether for tourism, business, or family visits, Air View simplifies every step so you can focus on your journey.",
       color: "from-green-500 to-emerald-500",
       image: GlobalVisaImage
     },
@@ -51,7 +51,7 @@ export function AnimatedServices() {
       icon: FileText,
       title: "UAE Tourist Visa",
       subtitle: "UAE Entry Made Easy",
-      description: "Fast and reliable UAE tourist visa processing services",
+      description: "Air View provides fast, reliable UAE tourist visa services, making entry to the UAE simple and stress-free. We handle the entire process—document checks, application filing, and timely updates—ensuring quick approval and a smooth experience. Whether visiting for leisure, family, or business, Air View makes UAE entry easy and hassle-free.",
       color: "from-emerald-500 to-teal-500",
       image: UAEVisaImage
     },
@@ -59,7 +59,7 @@ export function AnimatedServices() {
       icon: Building,
       title: "Hotel Booking",
       subtitle: "Luxury to Budget",
-      description: "Premium accommodations and hotel reservations worldwide",
+      description: "Air View offers worldwide hotel bookings, from luxury stays to budget-friendly options. Choose from premium resorts, boutique hotels, and affordable accommodations tailored to your travel needs. With seamless reservations, trusted partners, and great deals, Air View ensures a comfortable stay wherever your journey takes you.",
       color: "from-purple-500 to-pink-500",
       image: HotelImage
     },
@@ -67,7 +67,7 @@ export function AnimatedServices() {
       icon: Palmtree,
       title: "Holiday Packages",
       subtitle: "Complete Travel Solutions",
-      description: "Customized vacation packages for memorable experiences",
+      description: "Air View delivers customized holiday packages designed for unforgettable experiences. From romantic getaways to family adventures, we tailor itineraries to your interests and budget. Enjoy seamless planning, curated destinations, top accommodations, and guided activities—all crafted to give you a smooth, memorable vacation from start to finish.",
       color: "from-orange-500 to-red-500",
       image: HolidayImage
     },
@@ -75,7 +75,7 @@ export function AnimatedServices() {
       icon: Shield,
       title: "Travel Insurance",
       subtitle: "Comprehensive Coverage",
-      description: "Protect your journey with comprehensive travel insurance",
+      description: "Air View offers comprehensive travel insurance to protect you throughout your journey. From medical emergencies to trip cancellations, lost baggage, and unexpected delays, our coverage ensures peace of mind wherever you go. Travel confidently knowing Air View provides reliable protection and support for a safe, worry-free experience.",
       color: "from-indigo-500 to-blue-500",
       image: InsuranceImage
     },
@@ -83,7 +83,7 @@ export function AnimatedServices() {
       icon: Award,
       title: "Attestation Services",
       subtitle: "Document Verification",
-      description: "Professional document attestation and verification services",
+      description: "Air View provides professional attestation and document verification services for personal, educational, and commercial papers. We handle every step—authentication, verification, and embassy approvals—ensuring accuracy and timely processing. With Air View, your documents are certified smoothly and securely for use in the UAE and abroad.",
       color: "from-yellow-500 to-orange-500",
       image: AttestationImage
     },
@@ -91,7 +91,7 @@ export function AnimatedServices() {
       icon: Users,
       title: "City Tours",
       subtitle: "Guided Experiences",
-      description: "Discover destinations with expert local guides",
+      description: "Air View offers exciting city tours led by expert local guides, helping you explore top attractions and hidden gems with ease. Enjoy curated itineraries, comfortable transport, and engaging storytelling that brings each destination to life. Whether you prefer cultural highlights or scenic adventures, Air View delivers memorable guided experiences.",
       color: "from-teal-500 to-green-500",
       image: CityToursImage
     },
@@ -99,7 +99,7 @@ export function AnimatedServices() {
       icon: Briefcase,
       title: "Trip Organization",
       subtitle: "Business & Leisure",
-      description: "Complete trip planning and organization services",
+      description: "Air View provides complete trip organization for both business and leisure travelers. From flights and hotels to transport, activities, and itinerary planning, we manage every detail for a smooth, stress-free journey. Whether it’s a corporate trip or a personal getaway, Air View ensures a well-planned, perfectly coordinated travel experience.",
       color: "from-pink-500 to-purple-500",
       image: TripPlanningImage
     },
@@ -107,7 +107,7 @@ export function AnimatedServices() {
       icon: ClockIcon, // or ClockIcon, CalendarIcon
       title: "Visa Extension",
       subtitle: "Extend Your Stay with Ease",
-      description: "Hassle-free processing for your visa renewal",
+      description: "Air View offers smooth, hassle-free visa extension services to help you stay longer without stress. Our team manages the entire renewal process—from document checks to application submission—ensuring timely updates and quick processing. Whether for tourism, family visits, or business, Air View makes extending your stay simple and convenient.",
       color: "from-pink-500 to-purple-500",
       image: VisaExtensionImage
     },
@@ -115,7 +115,7 @@ export function AnimatedServices() {
       icon: Home,
       title: "Umrah Packages",
       subtitle: "Sacred Journey",
-      description: "Complete Umrah pilgrimage packages with expert guidance",
+      description: "Air View offers complete Umrah packages designed to make your sacred journey smooth and spiritually fulfilling. From visa processing and comfortable accommodations to guided rituals and reliable transport, we handle every detail with care. Travel with peace of mind as Air View provides expert support throughout your blessed pilgrimage.",
       color: "from-amber-500 to-orange-500",
       image: UmrahImage
     },
