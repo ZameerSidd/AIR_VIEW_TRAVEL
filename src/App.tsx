@@ -27,10 +27,10 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 relative overflow-hidden">
       {/* Background Elements */}
-      {/* <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-gradient-radial from-blue-500/10 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 to-transparent"></div>
-      </div> */}
+      </div>
 
       {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

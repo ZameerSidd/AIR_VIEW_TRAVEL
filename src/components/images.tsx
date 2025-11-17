@@ -1,6 +1,7 @@
 export const FlightImage = () => (
   <img 
-    src="images/Flight-Tickets.jpeg"
+    // src="images/Flight-Tickets.jpeg"// Old Image
+    src="images/Flight-Booking.jpg"
     alt="Flight Booking"
     className="w-full h-full object-cover"
   />
@@ -24,7 +25,8 @@ export const UAEVisaImage = () => (
 
 export const HotelImage = () => (
   <img 
-    src="images/Hotel-Booking.jpeg"
+    // src="images/Hotel-Booking.jpeg" // Old Image
+    src="images/Hotel-Booking.jpg" 
     alt="Hotel Booking"
     className="w-full h-full object-cover"
   />
@@ -32,7 +34,8 @@ export const HotelImage = () => (
 
 export const HolidayImage = () => (
   <img 
-    src="images/Holiday-Packages.jpeg"
+    // src="images/Holiday-Packages.jpeg" // Old Image
+    src="images/Holiday-Package.jpg"
     alt="Holiday Packages"
     className="w-full h-full object-cover"
   />
@@ -56,7 +59,8 @@ export const AttestationImage = () => (
 
 export const CityToursImage = () => (
   <img 
-    src="images/City-tour.jpeg"
+    // src="images/City-tour.jpeg"// Old Image
+    src="images/City-Tour.jpg"
     alt="City Tours"
     className="w-full h-full object-cover"
   />
@@ -79,7 +83,8 @@ export const VisaExtensionImage = () => (
 
 export const UmrahImage = () => (
   <img 
-    src="images/Umrah-Packages.jpeg"
+    // src="images/Umrah-Packages.jpeg" // Old Image
+    src="images/Umrah-Packages.jpg"
     alt="Umrah Packages"
     className="w-full h-full object-cover"
   />
