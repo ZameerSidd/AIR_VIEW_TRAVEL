@@ -119,6 +119,7 @@ export function ContactSection() {
           name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
           phone: formData.phone,
+          client:"AIR_VIEW_TRAVEL",
           message: formData.message
         })
       });
