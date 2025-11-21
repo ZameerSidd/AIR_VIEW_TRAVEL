@@ -56,7 +56,7 @@ export function VisionMissionSection() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Section Header */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -88,7 +88,7 @@ export function VisionMissionSection() {
           >
             Driven by passion for travel and commitment to excellence, we shape the future of travel experiences
           </motion.p>
-        </motion.div>
+        </motion.div> */}
 
         <div className="grid lg:grid-cols-2 gap-16">
           

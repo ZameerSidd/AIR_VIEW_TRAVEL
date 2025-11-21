@@ -14,11 +14,15 @@ import {
   Award,
   Users,
   Calendar,
-  Headphones
+  Headphones,
+  Loader2,
+  AlertCircle,
+  Check
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import { useState } from "react";
 
 // WhatsApp SVG Icon Component
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -35,6 +39,129 @@ export function ContactSection() {
   const whatsappNumber = "+971529969344"; // WhatsApp number
   const defaultMessage = "Hello! I'm interested in your travel services. Could you please provide more information?";
   
+  // Form state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: ""
+  });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<{[key: string]: string}>({});
+
+  // Form validation
+  const validateForm = () => {
+    const errors: {[key: string]: string} = {};
+    
+    // First Name validation
+    if (!formData.firstName || formData.firstName.trim() === "") {
+      errors.firstName = "First name is required";
+    }
+    
+    // Last Name validation
+    if (!formData.lastName || formData.lastName.trim() === "") {
+      errors.lastName = "Last name is required";
+    }
+    
+    // Email validation
+    if (!formData.email || formData.email.trim() === "") {
+      errors.email = "Email is required";
+    } else if (!formData.email.includes("@")) {
+      errors.email = "Please enter a valid email address";
+    }
+    
+    // Phone validation
+    if (!formData.phone || formData.phone.trim() === "") {
+      errors.phone = "Phone number is required";
+    } else if (formData.phone.trim().length < 8) {
+      errors.phone = "Please enter a valid phone number";
+    }
+    
+    // Message validation
+    if (!formData.message || formData.message.trim() === "") {
+      errors.message = "Message is required";
+    }
+    
+    setValidationErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Clear previous messages
+    setShowSuccess(false);
+    setShowError(false);
+    
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+    
+    setIsLoading(true);
+    
+    // Add half-second delay for user feedback
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    try {
+      const response = await fetch("https://alsakb.netlify.app/.netlify/functions/api/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pass: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJTYWlmQEdNQUlMLkNPTSIsIm5hbWUiOiIgU2FpZiIsImlhdCI6MTY5MDc5NTU2MiwiZXhwIjoxNjkzMzg3NTYyfQ.4OGCShJobyMTEaSKXB1l7abOtWX0ANNH2O0aUSzJjN4",
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message
+        })
+      });
+      
+      if (response.status === 200) {
+        setShowSuccess(true);
+        // Clear form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+        // Hide success message after 5 seconds
+        setTimeout(() => setShowSuccess(false), 5000);
+      } else {
+        setShowError(true);
+        // Hide error message after 5 seconds
+        setTimeout(() => setShowError(false), 5000);
+      }
+    } catch (error) {
+      setShowError(true);
+      // Hide error message after 5 seconds
+      setTimeout(() => setShowError(false), 5000);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear validation error for this field
+    if (validationErrors[field]) {
+      setValidationErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+
   const handleWhatsApp = () => {
     const url = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(defaultMessage)}`;
     window.open(url, '_blank');
@@ -58,7 +185,7 @@ export function ContactSection() {
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+971 2 442 0602", "+971 52 111 0932", "+971 52 111 0934"],
+      details: ["+971 2 442 0602", "+971 52 111 0934", "+971 52 996 9344"],
       color: "from-green-400 to-emerald-400",
       action: "phone"
     },
@@ -234,7 +361,7 @@ export function ContactSection() {
                                 }
                               }}
                             >
-                               {(info.action === "phone" || info.action === "email") ? idx + 1 + ") " : ""}{detail}
+                              {detail}
                             </motion.p>
                           ))}
                         </div>
@@ -330,11 +457,47 @@ export function ContactSection() {
                   className="inline-flex items-center gap-2 bg-green-500/20 text-green-600 px-3 py-1 rounded-full text-sm border border-green-500/30"
                 >
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  We typically respond within 2 hours
+                  We typically respond within 48 hours
                 </motion.div>
               </motion.div>
 
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Success Message */}
+                {showSuccess && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Check className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-green-800 font-medium">Mail sent successfully!</p>
+                      <p className="text-green-700 text-sm">We'll get back to you within 2 hours.</p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {showError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3"
+                  >
+                    <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-red-800 font-medium">Something went wrong</p>
+                      <p className="text-red-700 text-sm">Please try again after some time.</p>
+                    </div>
+                  </motion.div>
+                )}
+
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -348,8 +511,16 @@ export function ContactSection() {
                     </label>
                     <Input
                       placeholder="John"
-                      className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
+                      value={formData.firstName}
+                      onChange={(e) => handleInputChange("firstName", e.target.value)}
+                      className={`bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 ${
+                        validationErrors.firstName ? "border-red-500 focus:border-red-500" : ""
+                      }`}
+                      disabled={isLoading}
                     />
+                    {validationErrors.firstName && (
+                      <p className="text-red-500 text-xs mt-1">{validationErrors.firstName}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -357,8 +528,16 @@ export function ContactSection() {
                     </label>
                     <Input
                       placeholder="Doe"
-                      className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
+                      value={formData.lastName}
+                      onChange={(e) => handleInputChange("lastName", e.target.value)}
+                      className={`bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 ${
+                        validationErrors.lastName ? "border-red-500 focus:border-red-500" : ""
+                      }`}
+                      disabled={isLoading}
                     />
+                    {validationErrors.lastName && (
+                      <p className="text-red-500 text-xs mt-1">{validationErrors.lastName}</p>
+                    )}
                   </div>
                 </motion.div>
 
@@ -374,8 +553,16 @@ export function ContactSection() {
                   <Input
                     type="email"
                     placeholder="john@example.com"
-                    className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    className={`bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 ${
+                      validationErrors.email ? "border-red-500 focus:border-red-500" : ""
+                    }`}
+                    disabled={isLoading}
                   />
+                  {validationErrors.email && (
+                    <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>
+                  )}
                 </motion.div>
 
                 <motion.div
@@ -389,8 +576,16 @@ export function ContactSection() {
                   </label>
                   <Input
                     placeholder="+971 XX XXX XXXX"
-                    className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange("phone", e.target.value)}
+                    className={`bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 ${
+                      validationErrors.phone ? "border-red-500 focus:border-red-500" : ""
+                    }`}
+                    disabled={isLoading}
                   />
+                  {validationErrors.phone && (
+                    <p className="text-red-500 text-xs mt-1">{validationErrors.phone}</p>
+                  )}
                 </motion.div>
 
                 <motion.div
@@ -405,8 +600,16 @@ export function ContactSection() {
                   <Textarea
                     placeholder="Tell us about your travel plans..."
                     rows={4}
-                    className="bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 resize-none"
+                    value={formData.message}
+                    onChange={(e) => handleInputChange("message", e.target.value)}
+                    className={`bg-white/70 border-gray-300 text-slate-800 placeholder:text-gray-500 focus:border-blue-500 resize-none ${
+                      validationErrors.message ? "border-red-500 focus:border-red-500" : ""
+                    }`}
+                    disabled={isLoading}
                   />
+                  {validationErrors.message && (
+                    <p className="text-red-500 text-xs mt-1">{validationErrors.message}</p>
+                  )}
                 </motion.div>
 
                 <motion.div
@@ -417,27 +620,38 @@ export function ContactSection() {
                   className="space-y-4"
                 >
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                    whileTap={{ scale: isLoading ? 1 : 0.98 }}
                   >
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                      disabled={isLoading}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                     >
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: "100%" }}
-                        transition={{ duration: 0.6 }}
-                      />
-                      <Send className="w-5 h-5 mr-2 relative z-10" />
-                      <span className="relative z-10">Send Message</span>
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 relative z-10 animate-spin" />
+                          <span className="relative z-10">Please wait...</span>
+                        </>
+                      ) : (
+                        <>
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
+                            initial={{ x: "-100%" }}
+                            whileHover={{ x: "100%" }}
+                            transition={{ duration: 0.6 }}
+                          />
+                          <Send className="w-5 h-5 mr-2 relative z-10" />
+                          <span className="relative z-10">Send Message</span>
+                        </>
+                      )}
                     </Button>
                   </motion.div>
                   
                   {/* Alternative Contact Methods */}
                   <div className="grid grid-cols-3 gap-3">
                     <motion.button
+                      type="button"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handlePhoneCall("+971529969344")}
@@ -447,6 +661,7 @@ export function ContactSection() {
                       Call
                     </motion.button>
                     <motion.button
+                      type="button"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleWhatsApp}
@@ -456,6 +671,7 @@ export function ContactSection() {
                       Chat with us
                     </motion.button>
                     <motion.button
+                      type="button"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => handleEmail("reach@airviewtravel.ae")}
