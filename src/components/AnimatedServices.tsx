@@ -149,6 +149,16 @@ export function AnimatedServices() {
     }
   };
 
+// Scroll helper: smooth-scroll to #contact, fallback to page bottom
+const scrollToContact = () => {
+  const el = document.getElementById("contact");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }
+};
+
   return (
     <section id="services" className="py-20 px-4 relative">
       <div className="max-w-7xl mx-auto">
@@ -303,7 +313,9 @@ export function AnimatedServices() {
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+            <button 
+            onClick={scrollToContact}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300">
               <Globe className="w-5 h-5 inline mr-2" />
               Get Custom Quote
             </button>

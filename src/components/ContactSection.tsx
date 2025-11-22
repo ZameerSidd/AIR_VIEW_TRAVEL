@@ -172,9 +172,24 @@ export function ContactSection() {
     window.open(`tel:${phoneNumber}`, '_self');
   };
 
-  const handleEmail = (email: string) => {
-    window.open(`mailto:${email}`, '_self');
-  };
+const handleEmail = (email: string) => {
+  const subject = encodeURIComponent("Air View Travel Inquiry");
+  const body = encodeURIComponent("Hello,\n\nI would like to ask about...");
+
+  const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
+
+  // Try mailto first
+  const opened = window.open(mailto, "_self");
+
+  // Fallback to Gmail if mailto does nothing
+  setTimeout(() => {
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=${email}`,
+      "_blank"
+    );
+  }, 300);
+};
+
 
   const handleMapLocation = () => {
     const coordinates = "24.4719271,54.3395282";
@@ -358,6 +373,7 @@ export function ContactSection() {
                                 if (info.action === "phone") {
                                   handlePhoneCall(detail);
                                 } else if (info.action === "email") {
+                                  console.log("Email clicked:", detail);
                                   handleEmail(detail);
                                 }
                               }}
@@ -476,7 +492,7 @@ export function ContactSection() {
                     </div>
                     <div>
                       <p className="text-green-800 font-medium">Mail sent successfully!</p>
-                      <p className="text-green-700 text-sm">We'll get back to you within 2 hours.</p>
+                      <p className="text-green-700 text-sm">We'll get back to you within 24 hours.</p>
                     </div>
                   </motion.div>
                 )}
