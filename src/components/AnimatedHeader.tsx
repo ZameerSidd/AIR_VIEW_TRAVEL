@@ -50,56 +50,69 @@ export function AnimatedHeader() {
       >
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo and Company Name Section */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex items-center gap-4 cursor-pointer"
-              onClick={scrollToTop}
-            >
-              <motion.img
-                src={"images/header_logo.jpg"}
-                alt="Air View Travel Logo"
-                className="h-16 w-16 md:h-20 md:w-20 object-contain"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              />
-              <div>
-                <motion.h1
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ 
-                    x: 0, 
-                    opacity: 1,
-                    color: isScrolled ? "#111827" : "#ffffff"
-                  }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="font-bold text-lg md:text-xl leading-tight"
-                  style={{
-                    color: isScrolled ? "#111827" : "#ffffff",
-                    textShadow: isScrolled ? "none" : "0 2px 8px rgba(0,0,0,0.5)"
-                  }}
-                >
-                  AIR VIEW TRAVEL
-                </motion.h1>
-                <motion.p
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ 
-                    x: 0, 
-                    opacity: 1,
-                    color: isScrolled ? "#4b5563" : "#f3f4f6"
-                  }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="text-xs md:text-sm"
-                  style={{
-                    color: isScrolled ? "#4b5563" : "#f3f4f6",
-                    textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.4)"
-                  }}
-                >
-                  AND TOURISM - L.L.C
-                </motion.p>
-              </div>
-            </motion.div>
+
+<motion.div
+  initial={{ scale: 0, rotate: -180 }}
+  animate={{ scale: 1, rotate: 0 }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  className="flex items-center gap-4 cursor-pointer"
+  onClick={scrollToTop}
+>
+
+  {/* LOGO + RING (single logo only!) */}
+  <div
+    className={`rounded-full flex items-center justify-center transition-all duration-300 
+      ${isScrolled 
+        ? "p-0" 
+        : "p-1 bg-white/10 ring-2 ring-white/30 backdrop-blur-sm"
+      }`}
+  >
+    <motion.img
+      src={"images/logo.png"}
+      alt="Air View Travel Logo"
+      className={`object-contain transition-all duration-300 
+        ${isScrolled ? "h-16 w-16 md:h-20 md:w-20" : "h-16 w-16 md:h-20 md:w-20"}`}
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.3 }}
+    />
+  </div>
+
+  {/* TEXT CONTENT */}
+  <div>
+    <motion.h1
+      initial={{ x: -50, opacity: 0 }}
+      animate={{
+        x: 0,
+        opacity: 1,
+        color: isScrolled ? "#111827" : "#ffffff"
+      }}
+      transition={{ duration: 0.6, delay: 0.4 }}
+      className="font-bold text-lg md:text-xl leading-tight"
+      style={{
+        textShadow: isScrolled ? "none" : "0 2px 8px rgba(0,0,0,0.5)"
+      }}
+    >
+      AIR VIEW TRAVEL
+    </motion.h1>
+
+    <motion.p
+      initial={{ x: -50, opacity: 0 }}
+      animate={{
+        x: 0,
+        opacity: 1,
+        color: isScrolled ? "#4b5563" : "#f3f4f6"
+      }}
+      transition={{ duration: 0.6, delay: 0.5 }}
+      className="text-xs md:text-sm"
+      style={{
+        textShadow: isScrolled ? "none" : "0 2px 4px rgba(0,0,0,0.4)"
+      }}
+    >
+      AND TOURISM - L.L.C
+    </motion.p>
+  </div>
+</motion.div>
+
 
             {/* Desktop Navigation */}
             <motion.nav
@@ -229,7 +242,7 @@ export function AnimatedHeader() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <img
-                      src={"images/header_logo.jpg"}
+                      src={"images/logo.png"}
                       alt="Air View Travel Logo"
                       className="h-12 w-12 object-contain"
                     />
