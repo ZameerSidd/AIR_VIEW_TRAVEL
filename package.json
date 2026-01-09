@@ -1,6 +1,6 @@
 {
-      "name": "generate-ui-design-code",
-      "homepage": "https://ZameerSidd.github.io/AIR_VIEW_TRAVEL/",
+      "name": "air_view_travel",
+      "homepage": "https://airviewtravel.ae",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
