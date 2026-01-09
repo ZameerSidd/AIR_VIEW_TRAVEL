@@ -4,7 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
-    base: '/AIR_VIEW_TRAVEL/',
+    // base: '/AIR_VIEW_TRAVEL/',
+    base: '/',
     build: {
       outDir: 'build'
     },
